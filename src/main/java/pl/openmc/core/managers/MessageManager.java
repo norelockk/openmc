@@ -1,3 +1,4 @@
+
 package pl.openmc.core.managers;
 
 import org.bukkit.ChatColor;
@@ -37,18 +38,36 @@ public class MessageManager {
         prefix = formatMessage(prefix);
       }
 
-      // Load all messages
-      ConfigurationSection messagesSection = config.getConfigurationSection("messages");
-      if (messagesSection != null) {
-        for (String key : messagesSection.getKeys(false)) {
-          String message = messagesSection.getString(key);
-          if (message != null) {
-            messages.put(key.toLowerCase(), message);
-          }
-        }
-      }
+      // Load all messages recursively
+      loadMessagesRecursively(config.getConfigurationSection("messages"), "");
+
+      plugin.getPluginLogger().info("Loaded " + messages.size() + " messages");
     } else {
       plugin.getPluginLogger().warning("Messages config not found");
+    }
+  }
+
+  /**
+   * Recursively loads messages from nested configuration sections.
+   *
+   * @param section The configuration section to load from
+   * @param path The current path prefix
+   */
+  private void loadMessagesRecursively(ConfigurationSection section, String path) {
+    if (section == null) return;
+
+    for (String key : section.getKeys(false)) {
+      String currentPath = path.isEmpty() ? key : path + "." + key;
+
+      if (section.isConfigurationSection(key)) {
+        // Recursively load nested sections
+        loadMessagesRecursively(section.getConfigurationSection(key), currentPath);
+      } else {
+        String message = section.getString(key);
+        if (message != null) {
+          messages.put(currentPath.toLowerCase(), message);
+        }
+      }
     }
   }
 

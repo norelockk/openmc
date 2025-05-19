@@ -19,7 +19,6 @@ public final class Main extends JavaPlugin {
 
   @Override
   public void onEnable() {
-    // Set instance for static access
     instance = this;
 
     this.logger = new LoggerUtil(this);
@@ -35,6 +34,7 @@ public final class Main extends JavaPlugin {
 
     listenerManager.registerListeners();
     moduleManager.loadModules();
+    commandManager.registerCommands();
 
     logger.info("Core loaded");
   }

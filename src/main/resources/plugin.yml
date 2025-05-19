@@ -8,6 +8,8 @@ authors: [ norelockk ]
 website: https://norelock.dev
 
 commands:
+  omr:
+    permission: openmc.admin.reload
   chatbubble:
     aliases: [cb]
     permission: openmc.admin.chatbubble

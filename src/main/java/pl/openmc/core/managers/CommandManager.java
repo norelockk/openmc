@@ -3,6 +3,8 @@ package pl.openmc.core.managers;
 import org.bukkit.command.PluginCommand;
 import pl.openmc.core.Main;
 import pl.openmc.core.commands.BaseCommand;
+import pl.openmc.core.commands.admin.ReloadCommand;
+import pl.openmc.core.commands.admin.modules.ChatBubbleCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -13,6 +15,13 @@ public class CommandManager {
 
   public CommandManager(Main plugin) {
     this.plugin = plugin;
+  }
+
+  /**
+   * Registers all commands here
+   */
+  public void registerCommands() {
+    registerCommand(new ReloadCommand(plugin));
   }
 
   /**

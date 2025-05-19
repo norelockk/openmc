@@ -9,10 +9,10 @@ import java.util.List;
 
 public class ReloadCommand extends BaseCommand {
   public ReloadCommand(Main plugin) {
-    super(plugin, "openmc-reload");
+    super(plugin, "omr");
     setPermission("openmc.admin.reload");
     setDescription("Przeładowywuje konfiguracje i moduły");
-    setUsage("/openmc-reload");
+    setUsage("/omr");
   }
 
   @Override

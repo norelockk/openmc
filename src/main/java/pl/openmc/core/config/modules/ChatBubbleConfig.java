@@ -11,16 +11,13 @@ public class ChatBubbleConfig {
 
   // Default configuration values
   private boolean enabled = true;
-  private int displayDuration = 5;  // seconds
   private int maxWidth = 40;        // characters
   private long updateInterval = 5L; // ticks
   private double heightAbovePlayer = 2.5;
   private List<String> disabledWorlds = Arrays.asList("disabled_world1", "disabled_world2");
   private boolean usePermission = false;
   private String permission = "openmc.chatbubble";
-  private boolean showOnlyToNearbyPlayers = true;
   private double visibilityRange = 30.0;
-  private boolean fadeOut = true;
   private boolean showCommands = false;
   private List<String> commandsToShow = Arrays.asList("me", "say");
   private boolean showConsoleMessages = false;
@@ -48,16 +45,13 @@ public class ChatBubbleConfig {
 
     // Load values from config
     enabled = config.getBoolean("enabled", enabled);
-    displayDuration = config.getInt("display-duration", displayDuration);
     maxWidth = config.getInt("max-width", maxWidth);
     updateInterval = config.getLong("update-interval", updateInterval);
     heightAbovePlayer = config.getDouble("height-above-player", heightAbovePlayer);
     disabledWorlds = config.getStringList("disabled-worlds");
     usePermission = config.getBoolean("use-permission", usePermission);
     permission = config.getString("permission", permission);
-    showOnlyToNearbyPlayers = config.getBoolean("show-only-to-nearby-players", showOnlyToNearbyPlayers);
     visibilityRange = config.getDouble("visibility-range", visibilityRange);
-    fadeOut = config.getBoolean("fade-out", fadeOut);
     showCommands = config.getBoolean("show-commands", showCommands);
     commandsToShow = config.getStringList("commands-to-show");
     showConsoleMessages = config.getBoolean("show-console-messages", showConsoleMessages);
@@ -74,16 +68,13 @@ public class ChatBubbleConfig {
     FileConfiguration config = plugin.getConfigManager().getCustomConfig("chatbubble").getConfig();
 
     config.set("enabled", enabled);
-    config.set("display-duration", displayDuration);
     config.set("max-width", maxWidth);
     config.set("update-interval", updateInterval);
     config.set("height-above-player", heightAbovePlayer);
     config.set("disabled-worlds", disabledWorlds);
     config.set("use-permission", usePermission);
     config.set("permission", permission);
-    config.set("show-only-to-nearby-players", showOnlyToNearbyPlayers);
     config.set("visibility-range", visibilityRange);
-    config.set("fade-out", fadeOut);
     config.set("show-commands", showCommands);
     config.set("commands-to-show", commandsToShow);
     config.set("show-console-messages", showConsoleMessages);
@@ -95,17 +86,13 @@ public class ChatBubbleConfig {
     try {
       plugin.getConfigManager().getCustomConfig("chatbubble").save();
     } catch (Exception e) {
-      plugin.getPluginLogger().severe("Failed to save default ChatBubble configuration: " + e.getMessage());
+      plugin.getPluginLogger().severe("Chatbubble - Error saving default config: " + e.getMessage());
     }
   }
 
   // Getters
   public boolean isEnabled() {
     return enabled;
-  }
-
-  public int getDisplayDuration() {
-    return displayDuration;
   }
 
   public int getMaxWidth() {
@@ -130,18 +117,6 @@ public class ChatBubbleConfig {
 
   public String getPermission() {
     return permission;
-  }
-
-  public boolean isShowOnlyToNearbyPlayers() {
-    return showOnlyToNearbyPlayers;
-  }
-
-  public double getVisibilityRange() {
-    return visibilityRange;
-  }
-
-  public boolean isFadeOut() {
-    return fadeOut;
   }
 
   public boolean isShowCommands() {

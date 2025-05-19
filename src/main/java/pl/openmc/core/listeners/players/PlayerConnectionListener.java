@@ -27,15 +27,6 @@ public class PlayerConnectionListener implements Listener {
 
       event.setJoinMessage(joinMessage);
     }
-
-    // First join logic
-        /* if (!player.hasPlayedBefore()) {
-            String firstJoinMessage = plugin.getConfigManager().getCustomConfig("messages").getConfig()
-                    .getString("first-join-message", "§aWelcome %player% to the server for the first time!");
-            firstJoinMessage = firstJoinMessage.replace("%player%", player.getDisplayName());
-
-            plugin.getServer().broadcastMessage(firstJoinMessage);
-        } */
   }
 
   @EventHandler(priority = EventPriority.NORMAL)

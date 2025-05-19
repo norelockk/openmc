@@ -40,10 +40,6 @@ public class CommandManager {
         pluginCommand.setPermission(command.getPermission());
       }
 
-      if (command.getPermissionMessage() != null) {
-        pluginCommand.setPermissionMessage(command.getPermissionMessage());
-      }
-
       if (command.getAliases() != null) {
         pluginCommand.setAliases(command.getAliases());
       }

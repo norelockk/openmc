@@ -13,7 +13,6 @@ public class ChatBubbleModule extends Module {
   private ChatBubbleListener listener;
   private ChatBubbleManager bubbleManager;
   private ChatBubbleConfig config;
-  private ChatBubbleCommand command;
   private BukkitTask updateTask;
 
   public ChatBubbleModule(Main plugin) {
@@ -30,7 +29,7 @@ public class ChatBubbleModule extends Module {
     this.bubbleManager = new ChatBubbleManager(plugin, config);
 
     // Register command
-    this.command = new ChatBubbleCommand(plugin, this);
+    ChatBubbleCommand command = new ChatBubbleCommand(plugin, this);
 
     // Register listener
     this.listener = new ChatBubbleListener(plugin, bubbleManager);

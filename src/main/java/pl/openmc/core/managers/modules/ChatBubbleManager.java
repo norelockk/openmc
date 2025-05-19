@@ -42,7 +42,7 @@ public class ChatBubbleManager {
     }
 
     // Format the message
-    String formattedMessage = ChatColor.translateAlternateColorCodes('&', config.getBubbleFormat().replace("%message%", message));
+    String formattedMessage = config.getBubbleFormat().replace("%message%", message);
 
     // Remove existing bubble for this player if exists
     removeBubble(player.getUniqueId());

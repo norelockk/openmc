@@ -12,12 +12,16 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class ChatBubbleCommand extends BaseCommand {
-  private final Main plugin;
   private final ChatBubbleModule module;
 
+  /**
+   * Creates the ChatBubble command
+   *
+   * @param plugin The main plugin instance
+   * @param module The ChatBubble module instance
+   */
   public ChatBubbleCommand(Main plugin, ChatBubbleModule module) {
-    super("chatbubble", "openmc.chatbubble.admin", false, "Chat Bubble command", "/chatbubble <reload|test|help>");
-    this.plugin = plugin;
+    super(plugin, "chatbubble", "openmc.chatbubble.admin", false, "Chat Bubble command", "/chatbubble <reload|test|help>");
     this.module = module;
 
     // Add aliases
@@ -27,30 +31,29 @@ public class ChatBubbleCommand extends BaseCommand {
   @Override
   public boolean execute(CommandSender sender, String[] args) {
     if (args.length == 0) {
-      showHelp(sender);
       return true;
     }
 
     switch (args[0].toLowerCase()) {
       case "reload":
         if (!sender.hasPermission("openmc.chatbubble.admin.reload")) {
-          sender.sendMessage("§cYou don't have permission to reload the ChatBubble module.");
+          sendMessage(sender, "general.no_permission");
           return true;
         }
         module.getConfig().load();
-        sender.sendMessage("§aChat Bubble configuration reloaded successfully!");
+        sendMessage(sender, "chatbubble.config_reloaded");
         break;
 
       case "test":
         if (args.length < 2) {
-          sender.sendMessage("§cUsage: /chatbubble test <message>");
+          sender.sendMessage("§c.-.");
           return true;
         }
 
         // If sender is not a player, they can specify a target
         if (!(sender instanceof Player player)) {
           if (args.length < 3) {
-            sender.sendMessage("§cUsage from console: /chatbubble test <player> <message>");
+            sender.sendMessage("Użytek przez konsolke: /chatbubble test <gracz> <wiadomość>");
             return true;
           }
 
@@ -58,25 +61,24 @@ public class ChatBubbleCommand extends BaseCommand {
           Player target = plugin.getServer().getPlayerExact(targetName);
 
           if (target == null) {
-            sender.sendMessage("§cPlayer not found: " + targetName);
+            sendMessage(sender, "general.player_not_found", "%player%", targetName);
             return true;
           }
 
           // Join all remaining args as the message
           String message = String.join(" ", Arrays.copyOfRange(args, 2, args.length));
           module.createBubble(target, message);
-          sender.sendMessage("§aCreated test bubble for " + target.getName());
+          sendMessage(sender, "chatbubble.test_bubble_created_for_player", "%player%", target.getName());
         } else {
           // Join all remaining args as the message
           String message = String.join(" ", Arrays.copyOfRange(args, 1, args.length));
           module.createBubble(player, message);
-          sender.sendMessage("§aCreated test bubble with your message");
+          sendMessage(sender, "chatbubble.test_bubble_created");
         }
         break;
 
       case "help":
       default:
-        showHelp(sender);
         break;
     }
 
@@ -106,12 +108,5 @@ public class ChatBubbleCommand extends BaseCommand {
     }
 
     return new ArrayList<>();
-  }
-
-  private void showHelp(CommandSender sender) {
-    sender.sendMessage("§6===== Chat Bubble Help =====");
-    sender.sendMessage("§f/chatbubble reload §7- Reload the configuration");
-    sender.sendMessage("§f/chatbubble test <message> §7- Create a test bubble");
-    sender.sendMessage("§f/chatbubble help §7- Show this help message");
   }
 }

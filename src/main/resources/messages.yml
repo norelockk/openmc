@@ -1,0 +1,54 @@
+# Użyj & dla tzw. sproszczonych kolorów (np. &a, &b, &c)
+# Możesz też użyć &#RRGGBB dla kolorów hexowych
+
+prefix: "&bOpenMC&r:"
+
+messages:
+  general:
+    plugin_loaded: "&aCore włączony"
+    plugin_disabled: "&cCore wyłączony"
+    no_permission: "&cNie posiadasz wystarczających uprawnień"
+    player_only: "Ta komenda może zostać użyta tylko przez graczy!"
+    invalid_args: "&cNieprawidłowe argumenty komendy, dokładniejsze użycie: %usage%"
+
+  commands:
+    reload:
+      success: "&aKonfiguracja przeładowana pomyślnie &7(%module_count% modułów załadowano)"
+      failed: "&cKonfiguracja nie została załadowana. Sprawdź konsolę po więcej informacji i szczegółowego błędu."
+
+    module:
+      usage: "&cUżyj: %usage%"
+      specify_module: "&cPodaj nazwę modułu"
+      unknown_subcommand: "&cNieznana subkomenda: &7%subcommand%&c. Użyj: %usage%"
+      enable_failed: "&cNie udało się włączyć modułu &7%module%&c. Sprawdź konsolę po więcej informacji i szczegółowego błędu."
+      disable_failed: "&cNie udało się wyłączyć modułu &7%module%&c. Sprawdź konsolę po więcej informacji i szczegółowego błędu."
+
+      list:
+        header: "&b===== &lDostępne moduły &b====="
+        entry: "&8- &7%module%: %status%"
+        enabled: "&aWłączony"
+        disabled: "&cWyłączony"
+        footer: "&b===== &7%count% modułów (%enabled% włączonych) &b====="
+
+      info:
+        header: "&b===== &lModuł: &r%module% &b====="
+        status: "&7Status: %status%"
+        description: "&7Opis: &f%description%"
+        footer: "&b========================="
+
+    help:
+      header: "&b===== &lOpenMC &b====="
+      footer: "&b========================="
+      entry: "&7/%command% &f- %description%"
+
+  modules:
+    enabled: "&aModuł %module% został włączony"
+    disabled: "&cModuł %module% został wyłączony"
+    not_found: "&cModuł %module% nieznaleziony!"
+    already_enabled: "&cModuł %module% jest już włączony"
+    already_disabled: "&cModuł %module% jest już wyłączony"
+
+  player:
+    join: "&7%player% dołączył na serwer"
+    quit: "&7%player% wyszedł z serwera"
+    chat_format: "%player%: %message%"

@@ -30,6 +30,8 @@ public class ConfigManager {
     // Create and load custom configs
     createCustomConfig("modules");
     createCustomConfig("messages");
+
+    plugin.getPluginLogger().info("Loaded configurations");
   }
 
   /**
@@ -89,6 +91,8 @@ public class ConfigManager {
     for (CustomConfig config : customConfigs.values()) {
       config.reload();
     }
+
+    plugin.getPluginLogger().info("Reloaded configurations");
   }
 
   /**

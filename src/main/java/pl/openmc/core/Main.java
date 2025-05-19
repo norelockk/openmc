@@ -4,6 +4,7 @@ import org.bukkit.plugin.java.JavaPlugin;
 import pl.openmc.core.managers.CommandManager;
 import pl.openmc.core.managers.ConfigManager;
 import pl.openmc.core.managers.ListenerManager;
+import pl.openmc.core.managers.MessageManager;
 import pl.openmc.core.managers.ModuleManager;
 import pl.openmc.core.utils.LoggerUtil;
 
@@ -13,6 +14,7 @@ public final class Main extends JavaPlugin {
   private CommandManager commandManager;
   private ListenerManager listenerManager;
   private ModuleManager moduleManager;
+  private MessageManager messageManager;
   private LoggerUtil logger;
 
   @Override
@@ -21,8 +23,11 @@ public final class Main extends JavaPlugin {
     instance = this;
 
     this.logger = new LoggerUtil(this);
+
     this.configManager = new ConfigManager(this);
     configManager.loadConfigs();
+
+    this.messageManager = new MessageManager(this);
 
     this.moduleManager = new ModuleManager(this);
     this.commandManager = new CommandManager(this);
@@ -60,6 +65,10 @@ public final class Main extends JavaPlugin {
 
   public ModuleManager getModuleManager() {
     return moduleManager;
+  }
+
+  public MessageManager getMessageManager() {
+    return messageManager;
   }
 
   public LoggerUtil getPluginLogger() {

@@ -1,0 +1,13 @@
+name: openmc-core
+version: '1.0-SNAPSHOT'
+main: pl.openmc.core.Main
+api-version: '1.20'
+prefix: OpenMC
+load: STARTUP
+authors: [ norelockk ]
+website: https://norelock.dev
+
+commands:
+  chatbubble:
+    aliases: [cb]
+    permission: openmc.admin.chatbubble

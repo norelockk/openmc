@@ -1,0 +1,9 @@
+chat:
+  format: "%player%: %message%"
+  enable-filter: false
+  banned-words: []
+  use-custom-format: true
+
+messages:
+  custom-join-message: false
+  custom-quit-message: false

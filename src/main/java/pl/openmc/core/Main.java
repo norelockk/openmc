@@ -33,8 +33,10 @@ public final class Main extends JavaPlugin {
     this.listenerManager = new ListenerManager(this);
 
     listenerManager.registerListeners();
-    moduleManager.loadModules();
+    moduleManager.registerModules();
     commandManager.registerCommands();
+
+    moduleManager.loadModules();
 
     logger.info("Core loaded");
   }

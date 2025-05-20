@@ -18,7 +18,6 @@ public abstract class BaseCommand implements CommandExecutor, TabCompleter {
   private boolean playerOnly;
   private String description;
   private String usage;
-  private String permissionMessage;
   private final List<String> aliases;
 
   /**
@@ -34,7 +33,6 @@ public abstract class BaseCommand implements CommandExecutor, TabCompleter {
     this.playerOnly = false;
     this.description = "";
     this.usage = "/" + name;
-    this.permissionMessage = null;
     this.aliases = new ArrayList<>();
   }
 

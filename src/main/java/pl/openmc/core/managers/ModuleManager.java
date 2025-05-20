@@ -17,13 +17,17 @@ public class ModuleManager {
   }
 
   /**
+   * Registers modules
+   */
+  public void registerModules() {
+    // Player modules
+    registerModule(new ChatBubbleModule(plugin));
+  }
+
+  /**
    * Loads all enabled modules.
    */
   public void loadModules() {
-    // Register module classes
-    // Player modules
-    registerModule(new ChatBubbleModule(plugin));
-
     // Load modules based on configuration
     ConfigurationSection moduleConfig = plugin.getConfigManager().getCustomConfig("modules").getConfig().getConfigurationSection("modules");
 

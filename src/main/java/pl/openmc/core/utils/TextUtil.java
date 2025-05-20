@@ -1,9 +1,38 @@
 package pl.openmc.core.utils;
 
+import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
+import net.kyori.adventure.text.Component;
 import java.util.ArrayList;
 import java.util.List;
 
 public class TextUtil {
+  /**
+   * Replaces color codes in a string with actual colors.
+   *
+   * @param text The text to colorize
+   * @return The colorized text
+   */
+  public static String colorize(String text) {
+    if (text == null) {
+      return "";
+    }
+    return LegacyComponentSerializer.legacyAmpersand().serialize(
+           LegacyComponentSerializer.legacyAmpersand().deserialize(text));
+  }
+  
+  /**
+   * Converts a string with color codes to a Component.
+   *
+   * @param text The text to convert
+   * @return The Component with colors
+   */
+  public static Component colorizeComponent(String text) {
+    if (text == null) {
+      return Component.empty();
+    }
+    return LegacyComponentSerializer.legacyAmpersand().deserialize(text);
+  }
+  
   /**
    * Splits a text into lines based on maximum width.
    * Handles explicit line breaks (\n) and wraps long words.

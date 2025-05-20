@@ -4,6 +4,7 @@ import org.bukkit.configuration.ConfigurationSection;
 import pl.openmc.core.modules.BaseModule;
 import pl.openmc.core.Main;
 import pl.openmc.core.modules.ChatBubbleModule;
+import pl.openmc.core.modules.SidebarModule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,6 +23,7 @@ public class ModuleManager {
   public void registerModules() {
     // Player modules
     registerModule(new ChatBubbleModule(plugin));
+    registerModule(new SidebarModule(plugin));
   }
 
   /**

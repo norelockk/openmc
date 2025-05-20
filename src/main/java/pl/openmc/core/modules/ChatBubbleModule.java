@@ -9,7 +9,7 @@ import pl.openmc.core.config.modules.ChatBubbleConfig;
 import pl.openmc.core.listeners.modules.ChatBubbleListener;
 import pl.openmc.core.managers.modules.ChatBubbleManager;
 
-public class ChatBubbleModule extends Module {
+public class ChatBubbleModule extends BaseModule {
   private ChatBubbleListener listener;
   private ChatBubbleManager bubbleManager;
   private ChatBubbleConfig config;

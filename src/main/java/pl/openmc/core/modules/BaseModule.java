@@ -2,12 +2,12 @@ package pl.openmc.core.modules;
 
 import pl.openmc.core.Main;
 
-public abstract class Module {
+public abstract class BaseModule {
   protected final Main plugin;
   private final String name;
   private boolean enabled = false;
 
-  public Module(Main plugin, String name) {
+  public BaseModule(Main plugin, String name) {
     this.plugin = plugin;
     this.name = name;
   }

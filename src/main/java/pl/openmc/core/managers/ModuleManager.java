@@ -1,7 +1,7 @@
 package pl.openmc.core.managers;
 
 import org.bukkit.configuration.ConfigurationSection;
-import pl.openmc.core.modules.Module;
+import pl.openmc.core.modules.BaseModule;
 import pl.openmc.core.Main;
 import pl.openmc.core.modules.ChatBubbleModule;
 
@@ -10,7 +10,7 @@ import java.util.Map;
 
 public class ModuleManager {
   private final Main plugin;
-  private final Map<String, Module> modules = new HashMap<>();
+  private final Map<String, BaseModule> modules = new HashMap<>();
 
   public ModuleManager(Main plugin) {
     this.plugin = plugin;
@@ -34,14 +34,14 @@ public class ModuleManager {
     if (moduleConfig != null) {
       for (String moduleName : moduleConfig.getKeys(false)) {
         if (moduleConfig.getBoolean(moduleName + ".enabled", false)) {
-          Module module = modules.get(moduleName.toLowerCase());
+          BaseModule baseModule = modules.get(moduleName.toLowerCase());
 
-          if (module != null) {
+          if (baseModule != null) {
             try {
-              module.onEnable();
-              plugin.getPluginLogger().info("Enabled module: " + module.getName());
+              baseModule.onEnable();
+              plugin.getPluginLogger().info("Enabled module: " + baseModule.getName());
             } catch (Exception e) {
-              plugin.getPluginLogger().severe("Failed to enable module: " + module.getName());
+              plugin.getPluginLogger().severe("Failed to enable module: " + baseModule.getName());
               e.printStackTrace();
             }
           }
@@ -54,13 +54,13 @@ public class ModuleManager {
    * Unloads all modules.
    */
   public void unloadModules() {
-    for (Module module : modules.values()) {
-      if (module.isEnabled()) {
+    for (BaseModule baseModule : modules.values()) {
+      if (baseModule.isEnabled()) {
         try {
-          module.onDisable();
-          plugin.getPluginLogger().info("Disabled module: " + module.getName());
+          baseModule.onDisable();
+          plugin.getPluginLogger().info("Disabled module: " + baseModule.getName());
         } catch (Exception e) {
-          plugin.getPluginLogger().severe("Failed to disable module: " + module.getName());
+          plugin.getPluginLogger().severe("Failed to disable module: " + baseModule.getName());
           e.printStackTrace();
         }
       }
@@ -70,10 +70,10 @@ public class ModuleManager {
   /**
    * Registers a module with the manager.
    *
-   * @param module The module to register
+   * @param baseModule The module to register
    */
-  public void registerModule(Module module) {
-    modules.put(module.getName().toLowerCase(), module);
+  public void registerModule(BaseModule baseModule) {
+    modules.put(baseModule.getName().toLowerCase(), baseModule);
   }
 
   /**
@@ -82,7 +82,7 @@ public class ModuleManager {
    * @param name The module name
    * @return The module or null if not found
    */
-  public Module getModule(String name) {
+  public BaseModule getModule(String name) {
     return modules.get(name.toLowerCase());
   }
 
@@ -94,8 +94,8 @@ public class ModuleManager {
   public int getLoadedModuleCount() {
     int count = 0;
 
-    for (Module module : modules.values()) {
-      if (module.isEnabled()) {
+    for (BaseModule baseModule : modules.values()) {
+      if (baseModule.isEnabled()) {
         count++;
       }
     }
@@ -108,7 +108,7 @@ public class ModuleManager {
    *
    * @return The map of module names to modules
    */
-  public Map<String, Module> getModules() {
+  public Map<String, BaseModule> getModules() {
     return modules;
   }
 }

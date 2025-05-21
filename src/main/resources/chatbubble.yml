@@ -1,0 +1,22 @@
+enabled: true
+display-duration: 5
+max-width: 40
+update-interval: 0.45
+height-above-player: 2.5
+disabled-worlds:
+  - disabled_world1
+  - disabled_world2
+use-permission: false
+permission: openmc.chatbubble
+show-only-to-nearby-players: true
+visibility-range: 30.0
+fade-out: true
+show-commands: false
+commands-to-show:
+  - me
+  - say
+show-console-messages: false
+bubble-format: "   %message%   "
+min-display-duration: 10
+max-display-duration: 30
+duration-per-character: 50

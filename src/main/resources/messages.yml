@@ -14,14 +14,20 @@ messages:
   commands:
     reload:
       success: "&aKonfiguracja przeładowana pomyślnie &7(%module_count% modułów załadowano)"
-      failed: "&cKonfiguracja nie została załadowana. Sprawdź konsolę po więcej informacji i szczegółowego błędu."
+      failed:
+        "&cKonfiguracja nie została załadowana. Sprawdź konsolę po więcej informacji
+        i szczegółowego błędu."
 
     module:
       usage: "&cUżyj: %usage%"
       specify_module: "&cPodaj nazwę modułu"
       unknown_subcommand: "&cNieznana subkomenda: &7%subcommand%&c. Użyj: %usage%"
-      enable_failed: "&cNie udało się włączyć modułu &7%module%&c. Sprawdź konsolę po więcej informacji i szczegółowego błędu."
-      disable_failed: "&cNie udało się wyłączyć modułu &7%module%&c. Sprawdź konsolę po więcej informacji i szczegółowego błędu."
+      enable_failed:
+        "&cNie udało się włączyć modułu &7%module%&c. Sprawdź konsolę
+        po więcej informacji i szczegółowego błędu."
+      disable_failed:
+        "&cNie udało się wyłączyć modułu &7%module%&c. Sprawdź konsolę
+        po więcej informacji i szczegółowego błędu."
 
       list:
         header: "&b===== &lDostępne moduły &b====="

@@ -1,0 +1,31 @@
+title: §6§lOpenMC
+lines:
+  - ""
+  - §7§m——————————————————
+  - ""
+  - "§fGracz: §a%player_name%"
+  - "§fOnline: §a%server_online%"
+  - ""
+  - §7§m——————————————————
+  - ""
+  - §eplay.openmc.pl
+update-interval: 5
+animated-title: true
+title-frames:
+  - §6§lO§f§lpenMC
+  - §6§lOp§f§lenMC
+  - §6§lOpe§f§lnMC
+  - §6§lOpen§f§lMC
+  - §6§lOpenM§f§lC
+  - §6§lOpenMC
+  - §f§lO§6§lpenMC
+  - §f§lOp§6§lenMC
+  - §f§lOpe§6§lnMC
+  - §f§lOpen§6§lMC
+  - §f§lOpenM§6§lC
+  - §f§lOpenMC
+title-animation-speed: 10
+per-world-sidebars: true
+show-scoreboard: true
+use-player-placeholders: true
+use-server-placeholders: true

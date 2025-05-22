@@ -1,4 +1,4 @@
-package pl.openmc.core.managers.players;
+package pl.openmc.core.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;

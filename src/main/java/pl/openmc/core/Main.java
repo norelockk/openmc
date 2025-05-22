@@ -10,7 +10,7 @@ import pl.openmc.core.managers.ConfigManager;
 import pl.openmc.core.managers.ListenerManager;
 import pl.openmc.core.managers.MessageManager;
 import pl.openmc.core.managers.ModuleManager;
-import pl.openmc.core.managers.players.PlayerDataManager;
+import pl.openmc.core.managers.PlayerDataManager;
 import pl.openmc.core.utils.LoggerUtil;
 
 public final class Main extends JavaPlugin {

@@ -3,7 +3,7 @@ package pl.openmc.core.api;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.entity.Player;
 import pl.openmc.core.Main;
-import pl.openmc.core.managers.players.PlayerDataManager;
+import pl.openmc.core.managers.PlayerDataManager;
 import pl.openmc.core.models.player.PlayerData;
 
 import java.util.Optional;

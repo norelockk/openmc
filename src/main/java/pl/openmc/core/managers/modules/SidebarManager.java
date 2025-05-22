@@ -5,6 +5,7 @@ import org.bukkit.entity.Player;
 import pl.openmc.core.Main;
 import pl.openmc.core.config.modules.SidebarConfig;
 import pl.openmc.core.models.modules.Sidebar;
+import pl.openmc.core.utils.TextUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -124,53 +125,28 @@ public class SidebarManager {
     // Process player placeholders
     if (config.isUsePlayerPlaceholders()) {
       // Player name
-      replaceAll(result, "%player_name%", player.getName());
+      TextUtil.replaceAll(result, "%player_name%", player.getName());
       
       // Player ping
-      replaceAll(result, "%player_ping%", Integer.toString(player.getPing()));
-      
-      // Player display name
-      replaceAll(result, "%player_displayname%", player.getDisplayName());
+      TextUtil.replaceAll(result, "%player_ping%", Integer.toString(player.getPing()));
       
       // Player world
-      replaceAll(result, "%player_world%", player.getWorld().getName());
+      TextUtil.replaceAll(result, "%player_world%", player.getWorld().getName());
     }
     
     // Process server placeholders
     if (config.isUseServerPlaceholders()) {
       // Server online players
-      replaceAll(result, "%server_online%", Integer.toString(Bukkit.getOnlinePlayers().size()));
+      TextUtil.replaceAll(result, "%server_online%", Integer.toString(Bukkit.getOnlinePlayers().size()));
       
       // Server max players
-      replaceAll(result, "%server_max_players%", Integer.toString(Bukkit.getMaxPlayers()));
-      
-      // Server time
-      replaceAll(result, "%server_time%", getServerTime());
+      TextUtil.replaceAll(result, "%server_max_players%", Integer.toString(Bukkit.getMaxPlayers()));
       
       // Server TPS
-      replaceAll(result, "%server_tps%", getServerTPS());
+      TextUtil.replaceAll(result, "%server_tps%", getServerTPS());
     }
     
     return result.toString();
-  }
-  
-  /**
-   * Helper method to replace all occurrences of a placeholder in a StringBuilder.
-   *
-   * @param builder     The StringBuilder
-   * @param placeholder The placeholder to replace
-   * @param value       The value to replace with
-   */
-  private void replaceAll(StringBuilder builder, String placeholder, String value) {
-    if (value == null) {
-      value = "";
-    }
-    
-    int index = builder.indexOf(placeholder);
-    while (index != -1) {
-      builder.replace(index, index + placeholder.length(), value);
-      index = builder.indexOf(placeholder, index + value.length());
-    }
   }
 
   /**

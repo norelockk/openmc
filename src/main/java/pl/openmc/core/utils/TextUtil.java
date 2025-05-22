@@ -35,6 +35,25 @@ public class TextUtil {
     // Convert & color codes
     return ChatColor.translateAlternateColorCodes('&', message);
   }
+
+  /**
+   * Helper method to replace all occurrences of a placeholder in a StringBuilder.
+   *
+   * @param builder     The StringBuilder
+   * @param placeholder The placeholder to replace
+   * @param value       The value to replace with
+   */
+  public static void replaceAll(StringBuilder builder, String placeholder, String value) {
+    if (value == null) {
+      value = "";
+    }
+
+    int index = builder.indexOf(placeholder);
+    while (index != -1) {
+      builder.replace(index, index + placeholder.length(), value);
+      index = builder.indexOf(placeholder, index + value.length());
+    }
+  }
   
   /**
    * Splits a text into lines based on maximum width.

@@ -416,16 +416,6 @@ public class Sidebar {
     
     return entry.toString();
   }
-  
-  /**
-   * Gets a unique entry for the specified line index in the active objective.
-   *
-   * @param index The line index
-   * @return The entry string
-   */
-  private String getEntryForLine(int index) {
-    return getEntryForLine(activeObjectiveName, index);
-  }
 
   /**
    * Gets the player UUID.

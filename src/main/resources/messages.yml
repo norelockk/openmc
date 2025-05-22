@@ -57,4 +57,5 @@ messages:
   player:
     join: "&7%player% dołączył na serwer"
     quit: "&7%player% wyszedł z serwera"
-    chat_format: "%player%: %message%"
+    chat_format: "[%prefix%] %player%: %message%"
+    chat_banned_word: "&cTwoja wiadomość zawierała niewłaściwe słownictwo i została zablokowana."

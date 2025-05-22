@@ -1,10 +1,11 @@
 package pl.openmc.core.listeners.modules;
 
+import io.papermc.paper.event.player.AsyncChatEvent;
+import net.kyori.adventure.text.TextComponent;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.player.AsyncPlayerChatEvent;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
 import pl.openmc.core.Main;
@@ -20,13 +21,13 @@ public class ChatBubbleListener implements Listener {
   }
 
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
-  public void onPlayerChat(AsyncPlayerChatEvent event) {
+  public void onPlayerChat(AsyncChatEvent event) {
     // Don't create bubbles if the module is disabled
     if (!bubbleManager.getConfig().isEnabled())
       return;
 
     Player player = event.getPlayer();
-    String message = event.getMessage();
+    String message = ((TextComponent) event.message()).content();
 
     // Check if world is disabled
     if (bubbleManager.getConfig().getDisabledWorlds().contains(player.getWorld().getName()))

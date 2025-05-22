@@ -23,7 +23,7 @@ public class PlayerConnectionListener implements Listener {
     if (plugin.getConfigManager().getMainConfig().getBoolean("messages.custom-join-message", true)) {
       String joinMessage = plugin.getConfigManager().getCustomConfig("messages").getConfig()
           .getString("join-message", "§e%player% joined the game");
-      joinMessage = joinMessage.replace("%player%", player.getDisplayName());
+      joinMessage = joinMessage.replace("%player%", player.getName());
 
       event.setJoinMessage(joinMessage);
     }
@@ -37,7 +37,7 @@ public class PlayerConnectionListener implements Listener {
     if (plugin.getConfigManager().getMainConfig().getBoolean("messages.custom-quit-message", true)) {
       String quitMessage = plugin.getConfigManager().getCustomConfig("messages").getConfig()
           .getString("quit-message", "§e%player% left the game");
-      quitMessage = quitMessage.replace("%player%", player.getDisplayName());
+      quitMessage = quitMessage.replace("%player%", player.getName());
 
       event.setQuitMessage(quitMessage);
     }

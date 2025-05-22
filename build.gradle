@@ -58,9 +58,6 @@ processResources {
     filesMatching('plugin.yml') {
         expand props
     }
-    filesMatching('auth-plugin.yml') {
-        expand props
-    }
 }
 
 // Core plugin configuration
@@ -68,7 +65,6 @@ task coreJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
     archiveBaseName.set('OpenMCCore')
     from sourceSets.main.output
     configurations = [project.configurations.runtimeClasspath]
-    exclude 'pl/openmc/auth/**'
     
     manifest {
         attributes(
@@ -81,24 +77,4 @@ task coreJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
     from('src/main/resources/plugin.yml')
 }
 
-// Auth plugin configuration
-task authJar(type: com.github.jengelman.gradle.plugins.shadow.tasks.ShadowJar) {
-    archiveBaseName.set('OpenMCAuth')
-    from sourceSets.main.output
-    configurations = [project.configurations.runtimeClasspath]
-    include 'pl/openmc/auth/**'
-    include 'pl/openmc/core/api/**'
-    
-    manifest {
-        attributes(
-            'Implementation-Title': 'OpenMCAuth',
-            'Implementation-Version': version
-        )
-    }
-    
-    // Rename auth-plugin.yml to plugin.yml
-    rename 'auth-plugin.yml', 'plugin.yml'
-    from('src/main/resources/auth-plugin.yml')
-}
-
-build.dependsOn coreJar, authJar
+build.dependsOn coreJar

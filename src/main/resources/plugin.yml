@@ -6,6 +6,7 @@ prefix: OpenMC
 load: STARTUP
 authors: [ norelockk ]
 website: https://norelock.dev
+depend: [LuckPerms]
 
 commands:
   omr:

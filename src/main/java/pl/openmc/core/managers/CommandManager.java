@@ -4,7 +4,6 @@ import org.bukkit.command.PluginCommand;
 import pl.openmc.core.Main;
 import pl.openmc.core.commands.BaseCommand;
 import pl.openmc.core.commands.admin.ReloadCommand;
-import pl.openmc.core.commands.admin.modules.ChatBubbleCommand;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -21,6 +20,7 @@ public class CommandManager {
    * Registers all commands here
    */
   public void registerCommands() {
+    // ADMIN
     registerCommand(new ReloadCommand(plugin));
   }
 

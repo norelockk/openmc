@@ -1,11 +1,16 @@
 package pl.openmc.core;
 
+import net.luckperms.api.LuckPerms;
+import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
+import pl.openmc.core.api.CoreAPI;
+import pl.openmc.core.api.CoreAPIImpl;
 import pl.openmc.core.managers.CommandManager;
 import pl.openmc.core.managers.ConfigManager;
 import pl.openmc.core.managers.ListenerManager;
 import pl.openmc.core.managers.MessageManager;
 import pl.openmc.core.managers.ModuleManager;
+import pl.openmc.core.managers.players.PlayerDataManager;
 import pl.openmc.core.utils.LoggerUtil;
 
 public final class Main extends JavaPlugin {
@@ -15,6 +20,8 @@ public final class Main extends JavaPlugin {
   private ListenerManager listenerManager;
   private ModuleManager moduleManager;
   private MessageManager messageManager;
+  private PlayerDataManager playerDataManager;
+  private CoreAPI coreAPI;
   private LoggerUtil logger;
 
   @Override
@@ -27,6 +34,30 @@ public final class Main extends JavaPlugin {
     configManager.loadConfigs();
 
     this.messageManager = new MessageManager(this);
+    
+    // Initialize player data manager
+    this.playerDataManager = new PlayerDataManager(this);
+    
+    // Get LuckPerms API
+    RegisteredServiceProvider<LuckPerms> provider = getServer().getServicesManager().getRegistration(LuckPerms.class);
+    if (provider == null) {
+        logger.severe("LuckPerms not found! Make sure it's installed and loaded before this plugin.");
+        getServer().getPluginManager().disablePlugin(this);
+        return;
+    }
+    LuckPerms luckPerms = provider.getProvider();
+
+    
+    // Initialize API
+    this.coreAPI = new CoreAPIImpl(this, playerDataManager, luckPerms);
+    
+    // Register API service
+    getServer().getServicesManager().register(
+        CoreAPI.class, 
+        coreAPI, 
+        this, 
+        org.bukkit.plugin.ServicePriority.Normal
+    );
 
     this.moduleManager = new ModuleManager(this);
     this.commandManager = new CommandManager(this);
@@ -45,6 +76,11 @@ public final class Main extends JavaPlugin {
   public void onDisable() {
     configManager.saveConfigs();
     moduleManager.unloadModules();
+    
+    // Save all player data
+    if (playerDataManager != null) {
+      playerDataManager.shutdown();
+    }
 
     logger.info("Core unloaded");
   }
@@ -75,5 +111,13 @@ public final class Main extends JavaPlugin {
 
   public LoggerUtil getPluginLogger() {
     return logger;
+  }
+  
+  public PlayerDataManager getPlayerDataManager() {
+    return playerDataManager;
+  }
+  
+  public CoreAPI getCoreAPI() {
+    return coreAPI;
   }
 }

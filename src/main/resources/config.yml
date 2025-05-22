@@ -1,5 +1,5 @@
 chat:
-  format: "%player%: %message%"
+  format: "[%prefix%] %player%: %message%"
   enable-filter: false
   banned-words: []
   use-custom-format: true

@@ -6,6 +6,7 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
 import pl.openmc.core.Main;
+import pl.openmc.core.utils.TextUtil;
 
 public class PlayerChatListener implements Listener {
   private final Main plugin;
@@ -21,9 +22,20 @@ public class PlayerChatListener implements Listener {
 
     // Custom chat
     if (plugin.getConfigManager().getMainConfig().getBoolean("chat.use-custom-format", true)) {
-      String format = plugin.getConfigManager().getMainConfig().getString("chat.format", "<%player%> %message%");
-      format = format.replace("%player%", player.getDisplayName());
+      String format = plugin.getConfigManager().getMainConfig().getString("chat.format", "[%prefix%] %player%: %message%");
+      
+      // Get player's prefix from LuckPerms
+      String prefix = "";
+      if (plugin.getCoreAPI().getLuckPermsAPI() != null) {
+        prefix = plugin.getCoreAPI().getLuckPermsAPI().getPrefix(player);
+      }
+      
+      format = format.replace("%prefix%", prefix);
+      format = format.replace("%player%", player.getName());
       format = format.replace("%message%", message);
+      
+      // Colorize the format to support color codes
+      format = TextUtil.colorize(format);
 
       event.setFormat(format);
     }

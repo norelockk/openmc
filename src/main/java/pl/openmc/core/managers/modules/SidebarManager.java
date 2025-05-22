@@ -4,6 +4,7 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pl.openmc.core.Main;
 import pl.openmc.core.config.modules.SidebarConfig;
+import pl.openmc.core.internal.server.ServerUtils;
 import pl.openmc.core.models.modules.Sidebar;
 import pl.openmc.core.utils.TextUtil;
 
@@ -137,32 +138,16 @@ public class SidebarManager {
     // Process server placeholders
     if (config.isUseServerPlaceholders()) {
       // Server online players
-      TextUtil.replaceAll(result, "%server_online%", Integer.toString(Bukkit.getOnlinePlayers().size()));
+      TextUtil.replaceAll(result, "%server_online%", Integer.toString(ServerUtils.getOnlinePlayers()));
       
       // Server max players
-      TextUtil.replaceAll(result, "%server_max_players%", Integer.toString(Bukkit.getMaxPlayers()));
+      TextUtil.replaceAll(result, "%server_max_players%", Integer.toString(ServerUtils.getMaxPlayers()));
       
       // Server TPS
-      TextUtil.replaceAll(result, "%server_tps%", getServerTPS());
+      TextUtil.replaceAll(result, "%server_tps%", ServerUtils.getServerTPS());
     }
     
     return result.toString();
-  }
-
-  /**
-   * Gets the server TPS (ticks per second) as a formatted string.
-   *
-   * @return The server TPS
-   */
-  private String getServerTPS() {
-    try {
-      // Try to access the TPS method via reflection (Spigot-specific)
-      Object serverInstance = Bukkit.getServer().getClass().getMethod("getServer").invoke(Bukkit.getServer());
-      double[] tps = (double[]) serverInstance.getClass().getField("recentTps").get(serverInstance);
-      return String.format("%.1f", tps[0]);
-    } catch (Exception e) {
-      return "20.0"; // Default fallback
-    }
   }
 
   /**

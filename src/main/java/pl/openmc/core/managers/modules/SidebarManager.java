@@ -115,26 +115,62 @@ public class SidebarManager {
    * @return The processed text
    */
   private String processPlaceholders(Player player, String text) {
-    String processed = text;
+    if (text == null) {
+      return "";
+    }
+    
+    StringBuilder result = new StringBuilder(text);
     
     // Process player placeholders
     if (config.isUsePlayerPlaceholders()) {
-      processed = processed.replace("%player_name%", player.getName());
-      processed = processed.replace("%player_displayname%", player.getDisplayName());
-      processed = processed.replace("%player_world%", player.getWorld().getName());
-      processed = processed.replace("%player_health%", String.format("%.1f", player.getHealth()));
-      processed = processed.replace("%player_max_health%", String.format("%.1f", player.getMaxHealth()));
+      // Player name
+      replaceAll(result, "%player_name%", player.getName());
+      
+      // Player ping
+      replaceAll(result, "%player_ping%", Integer.toString(player.getPing()));
+      
+      // Player display name
+      replaceAll(result, "%player_displayname%", player.getDisplayName());
+      
+      // Player world
+      replaceAll(result, "%player_world%", player.getWorld().getName());
     }
     
     // Process server placeholders
     if (config.isUseServerPlaceholders()) {
-      processed = processed.replace("%server_online%", String.valueOf(Bukkit.getOnlinePlayers().size()));
-      processed = processed.replace("%server_max_players%", String.valueOf(Bukkit.getMaxPlayers()));
-      processed = processed.replace("%server_time%", getServerTime());
-      processed = processed.replace("%server_tps%", getServerTPS());
+      // Server online players
+      replaceAll(result, "%server_online%", Integer.toString(Bukkit.getOnlinePlayers().size()));
+      
+      // Server max players
+      replaceAll(result, "%server_max_players%", Integer.toString(Bukkit.getMaxPlayers()));
+      
+      // Server time
+      replaceAll(result, "%server_time%", getServerTime());
+      
+      // Server TPS
+      replaceAll(result, "%server_tps%", getServerTPS());
     }
     
-    return processed;
+    return result.toString();
+  }
+  
+  /**
+   * Helper method to replace all occurrences of a placeholder in a StringBuilder.
+   *
+   * @param builder     The StringBuilder
+   * @param placeholder The placeholder to replace
+   * @param value       The value to replace with
+   */
+  private void replaceAll(StringBuilder builder, String placeholder, String value) {
+    if (value == null) {
+      value = "";
+    }
+    
+    int index = builder.indexOf(placeholder);
+    while (index != -1) {
+      builder.replace(index, index + placeholder.length(), value);
+      index = builder.indexOf(placeholder, index + value.length());
+    }
   }
 
   /**

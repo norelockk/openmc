@@ -1,20 +1,16 @@
-
 package pl.openmc.core.managers;
 
-import org.bukkit.ChatColor;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import pl.openmc.core.Main;
+import pl.openmc.core.utils.TextUtil;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
 public class MessageManager {
   private final Main plugin;
   private final Map<String, String> messages = new HashMap<>();
-  private final Pattern hexPattern = Pattern.compile("&#([A-Fa-f0-9]{6})");
   private String prefix;
 
   public MessageManager(Main plugin) {
@@ -34,9 +30,8 @@ public class MessageManager {
 
       // Load prefix if exists
       prefix = config.getString("prefix", "");
-      if (!prefix.isEmpty()) {
-        prefix = formatMessage(prefix);
-      }
+      if (!prefix.isEmpty())
+        prefix = TextUtil.colorize(prefix);
 
       // Load all messages recursively
       loadMessagesRecursively(config.getConfigurationSection("messages"), "");
@@ -96,7 +91,7 @@ public class MessageManager {
       return key;
     }
 
-    String formattedMessage = formatMessage(message);
+    String formattedMessage = TextUtil.colorize(message);
 
     if (withPrefix && !prefix.isEmpty()) {
       return prefix + " " + formattedMessage;
@@ -128,33 +123,6 @@ public class MessageManager {
     }
 
     return message;
-  }
-
-  /**
-   * Formats a message with color codes.
-   *
-   * @param message The message to format
-   * @return The formatted message
-   */
-  public String formatMessage(String message) {
-    if (message == null) {
-      return "";
-    }
-
-    // Convert hex color codes (&#RRGGBB) to Bukkit color codes
-    Matcher matcher = hexPattern.matcher(message);
-    StringBuffer buffer = new StringBuffer();
-
-    while (matcher.find()) {
-      String hexColor = matcher.group(1);
-      matcher.appendReplacement(buffer, ChatColor.valueOf(hexColor) + "");
-    }
-
-    matcher.appendTail(buffer);
-    message = buffer.toString();
-
-    // Convert & color codes
-    return ChatColor.translateAlternateColorCodes('&', message);
   }
 
   /**

@@ -49,21 +49,23 @@ public class Sidebar {
    * @param newLines The new lines
    */
   public void updateLines(List<String> newLines) {
-    // Clear existing scores and teams
-    clearScoreboard();
-
-    // Add new lines
-    int lineCount = newLines.size();
-    for (int i = 0; i < lineCount; i++) {
+    int newLineCount = newLines.size();
+    int oldLineCount = lines.size();
+    
+    // First, update existing lines and add new ones
+    for (int i = 0; i < newLineCount; i++) {
       String line = newLines.get(i);
       String entry = getEntryForLine(i);
       String teamName = "line_" + i;
+      Team team = scoreboard.getTeam(teamName);
       
-      // Create team
-      Team team = scoreboard.registerNewTeam(teamName);
-      team.addEntry(entry);
+      // Create team if it doesn't exist
+      if (team == null) {
+        team = scoreboard.registerNewTeam(teamName);
+        team.addEntry(entry);
+      }
       
-      // Set team prefix/suffix to handle lines longer than 64 characters
+      // Update team prefix/suffix
       if (line.length() <= 64) {
         team.setPrefix(TextUtil.colorize(line));
         team.setSuffix("");
@@ -72,10 +74,23 @@ public class Sidebar {
         team.setSuffix(TextUtil.colorize(line.substring(64, Math.min(line.length(), 128))));
       }
       
-      // Set score
-      objective.getScore(entry).setScore(lineCount - i);
+      // Set score (only if it's not already set)
+      objective.getScore(entry).setScore(newLineCount - i);
     }
-
+    
+    // Remove any excess lines that are no longer needed
+    if (newLineCount < oldLineCount) {
+      for (int i = newLineCount; i < oldLineCount; i++) {
+        String entry = getEntryForLine(i);
+        scoreboard.resetScores(entry);
+        
+        Team team = scoreboard.getTeam("line_" + i);
+        if (team != null) {
+          team.unregister();
+        }
+      }
+    }
+    
     // Update lines list
     this.lines.clear();
     this.lines.addAll(newLines);
@@ -87,22 +102,32 @@ public class Sidebar {
    * @param title The new title
    */
   public void updateTitle(String title) {
-    this.title = title;
-    
-    // Unregister and recreate objective with new title
-    objective.unregister();
-    Objective newObjective = scoreboard.registerNewObjective("sidebar", Criteria.DUMMY, TextUtil.colorize(title), RenderType.INTEGER);
-    newObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
-    
-    // Restore scores
-    int lineCount = lines.size();
-    for (int i = 0; i < lineCount; i++) {
-      String entry = getEntryForLine(i);
-      newObjective.getScore(entry).setScore(lineCount - i);
+    // Only update if the title has actually changed
+    if (!this.title.equals(title)) {
+      this.title = title;
+      
+      // In Bukkit/Spigot, we need to recreate the objective to change the display name
+      boolean wasVisible = visible;
+      
+      // Unregister and recreate objective with new title
+      objective.unregister();
+      Objective newObjective = scoreboard.registerNewObjective("sidebar", Criteria.DUMMY, TextUtil.colorize(title), RenderType.INTEGER);
+      
+      // Only set display slot if it was visible before
+      if (wasVisible) {
+        newObjective.setDisplaySlot(DisplaySlot.SIDEBAR);
+      }
+      
+      // Restore scores efficiently
+      int lineCount = lines.size();
+      for (int i = 0; i < lineCount; i++) {
+        String entry = getEntryForLine(i);
+        newObjective.getScore(entry).setScore(lineCount - i);
+      }
+      
+      // Update the objective field to reference the new objective
+      this.objective = newObjective;
     }
-    
-    // Update the objective field to reference the new objective
-    this.objective = newObjective;
   }
 
   /**
@@ -148,16 +173,18 @@ public class Sidebar {
 
   /**
    * Clears all scores and teams from the scoreboard.
+   * This is a more efficient implementation that only removes sidebar-related entries.
    */
   private void clearScoreboard() {
-    // Remove existing scores
-    for (String entry : scoreboard.getEntries()) {
+    // Only clear entries and teams related to our sidebar
+    for (int i = 0; i < lines.size(); i++) {
+      String entry = getEntryForLine(i);
       scoreboard.resetScores(entry);
-    }
-    
-    // Remove existing teams
-    for (Team team : scoreboard.getTeams()) {
-      team.unregister();
+      
+      Team team = scoreboard.getTeam("line_" + i);
+      if (team != null) {
+        team.unregister();
+      }
     }
   }
 

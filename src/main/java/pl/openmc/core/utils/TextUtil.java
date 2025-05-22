@@ -1,36 +1,39 @@
 package pl.openmc.core.utils;
 
-import net.kyori.adventure.text.serializer.legacy.LegacyComponentSerializer;
-import net.kyori.adventure.text.Component;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+import org.bukkit.ChatColor;
 
 public class TextUtil {
+  private static final Pattern hexPattern = Pattern.compile("&#([A-Fa-f0-9]{6})");
+
   /**
-   * Replaces color codes in a string with actual colors.
+   * Converts hex color codes (#RRGGBB) to Bukkit color codes.
    *
-   * @param text The text to colorize
-   * @return The colorized text
+   * @param message The string containing hex color codes
+   * @return The modified string with Bukkit color codes
    */
-  public static String colorize(String text) {
-    if (text == null) {
+  public static String colorize(String message) {
+    if (message == null) {
       return "";
     }
-    return LegacyComponentSerializer.legacyAmpersand().serialize(
-           LegacyComponentSerializer.legacyAmpersand().deserialize(text));
-  }
-  
-  /**
-   * Converts a string with color codes to a Component.
-   *
-   * @param text The text to convert
-   * @return The Component with colors
-   */
-  public static Component colorizeComponent(String text) {
-    if (text == null) {
-      return Component.empty();
+
+    // Convert hex color codes (&#RRGGBB) to Bukkit color codes
+    Matcher matcher = hexPattern.matcher(message);
+    StringBuffer buffer = new StringBuffer();
+
+    while (matcher.find()) {
+      String hexColor = matcher.group(1);
+      matcher.appendReplacement(buffer, ChatColor.valueOf(hexColor) + "");
     }
-    return LegacyComponentSerializer.legacyAmpersand().deserialize(text);
+
+    matcher.appendTail(buffer);
+    message = buffer.toString();
+
+    // Convert & color codes
+    return ChatColor.translateAlternateColorCodes('&', message);
   }
   
   /**

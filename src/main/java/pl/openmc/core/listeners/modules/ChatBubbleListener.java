@@ -22,22 +22,15 @@ public class ChatBubbleListener implements Listener {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onPlayerChat(AsyncPlayerChatEvent event) {
     // Don't create bubbles if the module is disabled
-    if (!bubbleManager.getConfig().isEnabled()) {
+    if (!bubbleManager.getConfig().isEnabled())
       return;
-    }
 
     Player player = event.getPlayer();
     String message = event.getMessage();
 
-    // Check for permission if required
-    if (bubbleManager.getConfig().isUsePermission() && !player.hasPermission(bubbleManager.getConfig().getPermission())) {
-      return;
-    }
-
     // Check if world is disabled
-    if (bubbleManager.getConfig().getDisabledWorlds().contains(player.getWorld().getName())) {
+    if (bubbleManager.getConfig().getDisabledWorlds().contains(player.getWorld().getName()))
       return;
-    }
 
     // Schedule task to run on main thread since this is an async event
     plugin.getServer().getScheduler().runTask(plugin, () -> {
@@ -48,9 +41,8 @@ public class ChatBubbleListener implements Listener {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onPlayerCommand(PlayerCommandPreprocessEvent event) {
     // Don't process if command bubbles are disabled
-    if (!bubbleManager.getConfig().isEnabled() || !bubbleManager.getConfig().isShowCommands()) {
+    if (!bubbleManager.getConfig().isEnabled() || !bubbleManager.getConfig().isShowCommands())
       return;
-    }
 
     Player player = event.getPlayer();
     String command = event.getMessage().substring(1); // Remove the slash
@@ -58,15 +50,9 @@ public class ChatBubbleListener implements Listener {
 
     // Check if this command should be shown
     if (parts.length > 0 && bubbleManager.getConfig().getCommandsToShow().contains(parts[0].toLowerCase())) {
-      // Check for permission if required
-      if (bubbleManager.getConfig().isUsePermission() && !player.hasPermission(bubbleManager.getConfig().getPermission())) {
-        return;
-      }
-
       // Check if world is disabled
-      if (bubbleManager.getConfig().getDisabledWorlds().contains(player.getWorld().getName())) {
+      if (bubbleManager.getConfig().getDisabledWorlds().contains(player.getWorld().getName()))
         return;
-      }
 
       // If there's message content after the command
       if (parts.length > 1) {
@@ -78,9 +64,8 @@ public class ChatBubbleListener implements Listener {
   @EventHandler(priority = EventPriority.MONITOR, ignoreCancelled = true)
   public void onConsoleCommand(ServerCommandEvent event) {
     // Don't process if console messages are disabled
-    if (!bubbleManager.getConfig().isEnabled() || !bubbleManager.getConfig().isShowConsoleMessages()) {
+    if (!bubbleManager.getConfig().isEnabled() || !bubbleManager.getConfig().isShowConsoleMessages())
       return;
-    }
 
     String command = event.getCommand();
     String[] parts = command.split(" ", 3);
@@ -93,9 +78,8 @@ public class ChatBubbleListener implements Listener {
       Player target = plugin.getServer().getPlayerExact(targetName);
       if (target != null) {
         // Check if world is disabled
-        if (bubbleManager.getConfig().getDisabledWorlds().contains(target.getWorld().getName())) {
+        if (bubbleManager.getConfig().getDisabledWorlds().contains(target.getWorld().getName()))
           return;
-        }
 
         bubbleManager.createBubble(target, message);
       }

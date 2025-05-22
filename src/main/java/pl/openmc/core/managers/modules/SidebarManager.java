@@ -150,16 +150,6 @@ public class SidebarManager {
   }
 
   /**
-   * Gets the current server time as a formatted string.
-   *
-   * @return The server time
-   */
-  private String getServerTime() {
-    Calendar calendar = Calendar.getInstance();
-    return String.format("%02d:%02d", calendar.get(Calendar.HOUR_OF_DAY), calendar.get(Calendar.MINUTE));
-  }
-
-  /**
    * Gets the server TPS (ticks per second) as a formatted string.
    *
    * @return The server TPS

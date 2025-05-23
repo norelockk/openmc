@@ -59,3 +59,4 @@ messages:
     quit: "&7%player% wyszedł z serwera"
     chat_format: "[%prefix%] %player%: %message%"
     chat_banned_word: "&cTwoja wiadomość zawierała niewłaściwe słownictwo i została zablokowana."
+    banned_block: "&cNie możesz %action% bloku &7%block%&c, ponieważ jest on zablokowany."

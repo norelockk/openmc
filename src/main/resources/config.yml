@@ -1,8 +1,12 @@
 chat:
-  format: "[%prefix%] %player%: %message%"
   enable-filter: false
   banned-words: []
   use-custom-format: true
+
+blocks:
+  enable-banned-blocks: true
+  banned-blocks:
+    - "TNT"
 
 messages:
   custom-join-message: false

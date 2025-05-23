@@ -2,6 +2,7 @@ package pl.openmc.core.managers;
 
 import org.bukkit.event.Listener;
 import pl.openmc.core.Main;
+import pl.openmc.core.listeners.players.PlayerBlockListener;
 import pl.openmc.core.listeners.players.PlayerChatListener;
 import pl.openmc.core.listeners.players.PlayerConnectionListener;
 
@@ -23,6 +24,7 @@ public class ListenerManager {
     // Player listeners
     registerListener(new PlayerChatListener(plugin));
     registerListener(new PlayerConnectionListener(plugin));
+    registerListener(new PlayerBlockListener(plugin));
   }
 
   /**

@@ -103,13 +103,6 @@ public class PlayerDataManager implements Listener {
         // Load basic properties
         playerData.setPoints(Integer.parseInt(properties.getProperty("points", "0")));
 
-        // // Load additional data
-        // for (String key : properties.stringPropertyNames()) {
-        //   if (!key.equals("points") && !key.equals("rank")) {
-        //     playerData.setData(key, properties.getProperty(key));
-        //   }
-        // }
-
         logger.info("Loaded player data for " + player.getName());
       } catch (IOException e) {
         logger.severe("Failed to load player data for " + player.getName());

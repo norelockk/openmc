@@ -9,30 +9,26 @@ import org.bukkit.ChatColor;
 public class TextUtil {
   private static final Pattern hexPattern = Pattern.compile("&#([A-Fa-f0-9]{6})");
 
-  /**
-   * Converts hex color codes (#RRGGBB) to Bukkit color codes.
-   *
-   * @param message The string containing hex color codes
-   * @return The modified string with Bukkit color codes
-   */
   public static String colorize(String message) {
     if (message == null) {
       return "";
     }
 
-    // Convert hex color codes (&#RRGGBB) to Bukkit color codes
     Matcher matcher = hexPattern.matcher(message);
     StringBuffer buffer = new StringBuffer();
 
     while (matcher.find()) {
-      String hexColor = matcher.group(1);
-      matcher.appendReplacement(buffer, ChatColor.valueOf(hexColor) + "");
+      String hex = matcher.group(1);
+      StringBuilder replacement = new StringBuilder("§x");
+      for (char c : hex.toCharArray()) {
+        replacement.append('§').append(c);
+      }
+      matcher.appendReplacement(buffer, replacement.toString());
     }
 
     matcher.appendTail(buffer);
     message = buffer.toString();
 
-    // Convert & color codes
     return ChatColor.translateAlternateColorCodes('&', message);
   }
 
@@ -54,7 +50,7 @@ public class TextUtil {
       index = builder.indexOf(placeholder, index + value.length());
     }
   }
-  
+
   /**
    * Splits a text into lines based on maximum width.
    * Handles explicit line breaks (\n) and wraps long words.

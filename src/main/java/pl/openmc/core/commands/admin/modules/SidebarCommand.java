@@ -31,7 +31,7 @@ public class SidebarCommand extends BaseCommand {
     }
 
     if (args.length == 0) {
-      sender.sendMessage(getUsage());
+      sendMessage(sender, "sidebar.usage");
       return true;
     }
 
@@ -51,7 +51,7 @@ public class SidebarCommand extends BaseCommand {
         handleReloadCommand(sender);
         break;
       default:
-        sender.sendMessage(getUsage());
+        sendMessage(sender, "sidebar.usage");
         break;
     }
 
@@ -74,9 +74,9 @@ public class SidebarCommand extends BaseCommand {
     boolean visible = module.getSidebarManager().toggleSidebar(target);
     
     if (visible) {
-      sender.sendMessage("§aEnabled sidebar for " + target.getName());
+      sendMessage(sender, "sidebar.enabled", "%player%", target.getName());
     } else {
-      sender.sendMessage("§cDisabled sidebar for " + target.getName());
+      sendMessage(sender, "sidebar.disabled", "%player%", target.getName());
     }
   }
 
@@ -94,7 +94,7 @@ public class SidebarCommand extends BaseCommand {
     }
 
     module.getSidebarManager().showSidebar(target);
-    sender.sendMessage("§aEnabled sidebar for " + target.getName());
+    sendMessage(sender, "sidebar.enabled", "%player%", target.getName());
   }
 
   /**
@@ -111,7 +111,7 @@ public class SidebarCommand extends BaseCommand {
     }
 
     module.getSidebarManager().hideSidebar(target);
-    sender.sendMessage("§cDisabled sidebar for " + target.getName());
+    sendMessage(sender, "sidebar.disabled", "%player%", target.getName());
   }
 
   /**
@@ -121,7 +121,7 @@ public class SidebarCommand extends BaseCommand {
    */
   private void handleReloadCommand(CommandSender sender) {
     module.reload();
-    sender.sendMessage("§aSidebar module reloaded successfully.");
+    sendMessage(sender, "sidebar.reload_success");
   }
 
   /**
@@ -139,7 +139,7 @@ public class SidebarCommand extends BaseCommand {
       target = Bukkit.getPlayer(args[1]);
       
       if (target == null) {
-        sender.sendMessage("§cPlayer not found: " + args[1]);
+        sendMessage(sender, "general.player_not_found", "%player%", args[1]);
         return null;
       }
     } else if (sender instanceof Player) {
@@ -147,7 +147,7 @@ public class SidebarCommand extends BaseCommand {
       target = (Player) sender;
     } else {
       // Console needs to specify a player
-      sender.sendMessage("§cYou must specify a player when using this command from console.");
+      sendMessage(sender, "sidebar.console_needs_player");
       return null;
     }
     

@@ -27,7 +27,11 @@ public class SidebarConfig {
     // Initialize default lines
     lines.add("§7§m----------------");
     lines.add("§fGracz: §a%player_name%");
+    lines.add("§fPing: §a%player_ping%ms");
+    lines.add("§fPacket Loss: %player_packet_loss%");
     lines.add("§fOnline: §a%server_online%");
+    lines.add("§fTime: §a%real_time%");
+    lines.add("§fDate: §a%real_date%");
     lines.add("§7§m----------------");
     lines.add("§eplay.openmc.pl");
     
@@ -113,7 +117,11 @@ public class SidebarConfig {
     lines.clear();
     lines.add("§7§m----------------");
     lines.add("§fGracz: §a%player_name%");
+    lines.add("§fPing: §a%player_ping%ms");
+    lines.add("§fPacket Loss: %player_packet_loss%");
     lines.add("§fOnline: §a%server_online%");
+    lines.add("§fTime: §a%real_time%");
+    lines.add("§fDate: §a%real_date%");
     lines.add("§7§m----------------");
     lines.add("§eplay.openmc.pl");
   }

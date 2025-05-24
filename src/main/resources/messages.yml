@@ -10,6 +10,7 @@ messages:
     no_permission: "&cNie posiadasz wystarczających uprawnień"
     player_only: "Ta komenda może zostać użyta tylko przez graczy!"
     invalid_args: "&cNieprawidłowe argumenty komendy, dokładniejsze użycie: %usage%"
+    player_not_found: "&cGracz '%player%' nie został znaleziony lub nie jest online."
 
   commands:
     reload:
@@ -54,13 +55,72 @@ messages:
     already_enabled: "&cModuł %module% jest już włączony"
     already_disabled: "&cModuł %module% jest już wyłączony"
 
+    # RealTime module messages
+    realtime:
+      reload_success: "&aModuł czasu rzeczywistego został pomyślnie przeładowany."
+      usage_addworld: "&cUżycie: /realtime addworld <świat>"
+      usage_removeworld: "&cUżycie: /realtime removeworld <świat>"
+      usage_sync: "&cUżycie: /realtime sync <świat>"
+      world_not_found: "&cŚwiat '%world%' nie został znaleziony."
+      world_added: "&aŚwiat '%world%' został dodany do synchronizacji czasu rzeczywistego."
+      world_already_synced: "&cŚwiat '%world%' jest już zsynchronizowany."
+      world_removed: "&aŚwiat '%world%' został usunięty z synchronizacji czasu rzeczywistego."
+      world_not_synced: "&cŚwiat '%world%' nie jest zsynchronizowany."
+      world_synced: "&aZsynchronizowano świat '%world%' z czasem rzeczywistym."
+      current_time: "&aAktualny czas w Polsce: &f%time%\n&aAktualna data w Polsce: &f%date%"
+
+      help:
+        header: "&6&lKomendy Modułu Czasu Rzeczywistego"
+        reload: "&e/realtime reload &7- Przeładuj konfigurację modułu"
+        info: "&e/realtime info &7- Pokaż informacje o module"
+        addworld: "&e/realtime addworld <świat> &7- Dodaj świat do synchronizacji"
+        removeworld: "&e/realtime removeworld <świat> &7- Usuń świat z synchronizacji"
+        sync: "&e/realtime sync [świat] &7- Ręcznie zsynchronizuj świat z czasem rzeczywistym"
+        time: "&e/realtime time &7- Pokaż aktualny czas w Polsce"
+        footer: "&6&l================================"
+
+      info:
+        header: "&6&lInformacje o Module Czasu Rzeczywistego"
+        status: "&eStatus: &f%status%"
+        enabled: "&aWłączony"
+        disabled: "&cWyłączony"
+        current_time: "&eAktualny czas w Polsce: &f%time%\n&eAktualna data w Polsce: &f%date%"
+        worlds: "&eZsynchronizowane światy (%count%): &f%worlds%"
+        no_worlds: "brak"
+        footer: "&6&l================================"
+
+    # PacketLoss module messages
+    packetloss:
+      reload_success: "&aŚledzenie utraty pakietów zostało pomyślnie przeładowane."
+      usage_check: "&cUżycie: /packetloss check <gracz>"
+      player_not_found: "&cGracz '%player%' nie został znaleziony lub nie jest online."
+      self_check: "&aTwoja utrata pakietów: %loss% &7(%value%%)"
+      player_check: "&aUtrata pakietów dla gracza %player%: %loss% &7(%value%%)"
+
+      help:
+        header: "&6&lKomendy Śledzenia Utraty Pakietów"
+        reload: "&e/packetloss reload &7- Przeładuj śledzenie utraty pakietów"
+        info: "&e/packetloss info &7- Pokaż informacje o module"
+        check: "&e/packetloss check [gracz] &7- Sprawdź utratę pakietów dla gracza"
+        footer: "&6&l================================"
+
+      info:
+        header: "&6&lInformacje o Śledzeniu Utraty Pakietów"
+        status: "&eStatus: &f%status%"
+        enabled: "&aWłączony"
+        disabled: "&cWyłączony"
+        players_header: "&eUtrata pakietów dla graczy online:"
+        no_players: "  &7Brak graczy online"
+        player_entry: "  &f%player%: %loss% &7(%value%%)"
+        footer: "&6&l================================"
+
   player:
     join: "&7%player% dołączył na serwer"
     quit: "&7%player% wyszedł z serwera"
-    chat_format: "[%prefix%] %player%: %message%"
+    chat_format: "&7[%prefix%&7]&r %player%: %message%"
     chat_banned_word: "&cTwoja wiadomość zawierała niewłaściwe słownictwo i została zablokowana."
     banned_block: "&cNie możesz %action% bloku &7%block%&c, ponieważ jest on zablokowany."
-    
+
   vampire:
     enabled_self: "&aWłączono tryb wampira! Masz teraz skórkę anime wampirzycy, białe skrzydła z cząsteczek i nieśmiertelność."
     disabled_self: "&cWyłączono tryb wampira. Twoja skórka i umiejętności zostały przywrócone."
@@ -71,3 +131,41 @@ messages:
     already_enabled: "&cTryb wampira jest już włączony dla gracza &7%player%&c."
     already_disabled: "&cTryb wampira jest już wyłączony dla gracza &7%player%&c."
     config_reloaded: "&aKonfiguracja trybu wampira została przeładowana."
+
+    help:
+      header: "&6Komendy Trybu Wampira:"
+      toggle_self: "&e/vampire toggle &7- Przełącz tryb wampira dla siebie"
+      on_self: "&e/vampire on &7- Włącz tryb wampira dla siebie"
+      off_self: "&e/vampire off &7- Wyłącz tryb wampira dla siebie"
+      toggle_other: "&e/vampire toggle <gracz> &7- Przełącz tryb wampira dla innego gracza"
+      on_other: "&e/vampire on <gracz> &7- Włącz tryb wampira dla innego gracza"
+      off_other: "&e/vampire off <gracz> &7- Wyłącz tryb wampira dla innego gracza"
+      reload: "&e/vampire reload &7- Przeładuj konfigurację trybu wampira"
+      help: "&e/vampire help &7- Pokaż tę wiadomość pomocy"
+      description_header: "&6=== Pomoc Trybu Wampira ==="
+      description_skin: "&7Tryb wampira daje ci:"
+      description_wings: "&7- Skórkę anime wampirzycy"
+      description_godmode: "&7- Białe skrzydła z cząsteczek"
+      description_immunity: "&7- Tryb boga (odporność na obrażenia)"
+
+  # ChatBubble module messages
+  chatbubble:
+    config_reloaded: "&aKonfiguracja dymków czatu została przeładowana."
+    test_missing_message: "&cMusisz podać wiadomość do przetestowania."
+    test_console_usage: "&cUżycie przez konsolę: /chatbubble test <gracz> <wiadomość>"
+    test_bubble_created: "&aUtworzyłeś testowy dymek czatu."
+    test_bubble_created_for_player: "&aUtworzyłeś testowy dymek czatu dla gracza %player%."
+
+    help:
+      header: "&6=== Komendy Dymków Czatu ==="
+      reload: "&e/chatbubble reload &7- Przeładuj konfigurację dymków czatu"
+      test: "&e/chatbubble test <wiadomość> &7- Utwórz testowy dymek czatu"
+      footer: "&6================================"
+
+  # Sidebar module messages
+  sidebar:
+    usage: "&cUżycie: /sidebar <toggle|show|hide|reload> [gracz]"
+    enabled: "&aWłączono pasek boczny dla gracza %player%."
+    disabled: "&cWyłączono pasek boczny dla gracza %player%."
+    reload_success: "&aPomyślnie przeładowano moduł paska bocznego."
+    console_needs_player: "&cMusisz podać gracza, używając tej komendy z konsoli."

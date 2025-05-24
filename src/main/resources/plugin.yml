@@ -17,3 +17,12 @@ commands:
   chatbubble:
     aliases: [cb]
     permission: openmc.admin.chatbubble
+  realtime:
+    aliases: [rt]
+    permission: openmc.admin.realtime
+  packetloss:
+    aliases: [pl]
+    permission: openmc.admin.packetloss
+  sidebar:
+    aliases: [sb]
+    permission: openmc.admin.module.sidebar

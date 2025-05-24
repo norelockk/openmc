@@ -46,14 +46,14 @@ public class ChatBubbleCommand extends BaseCommand {
 
       case "test":
         if (args.length < 2) {
-          sender.sendMessage("§c.-.");
+          sendMessage(sender, "chatbubble.test_missing_message");
           return true;
         }
 
         // If sender is not a player, they can specify a target
         if (!(sender instanceof Player player)) {
           if (args.length < 3) {
-            sender.sendMessage("Użytek przez konsolke: /chatbubble test <gracz> <wiadomość>");
+            sendMessage(sender, "chatbubble.test_console_usage");
             return true;
           }
 
@@ -79,6 +79,10 @@ public class ChatBubbleCommand extends BaseCommand {
 
       case "help":
       default:
+        sendMessage(sender, "chatbubble.help.header");
+        sendMessage(sender, "chatbubble.help.reload");
+        sendMessage(sender, "chatbubble.help.test");
+        sendMessage(sender, "chatbubble.help.footer");
         break;
     }
 

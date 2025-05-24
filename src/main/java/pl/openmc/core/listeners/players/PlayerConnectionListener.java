@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.openmc.core.Main;
+import pl.openmc.core.internal.network.PacketLossTracker;
 
 public class PlayerConnectionListener implements Listener {
   private final Main plugin;
@@ -27,6 +28,14 @@ public class PlayerConnectionListener implements Listener {
 
       event.setJoinMessage(joinMessage);
     }
+
+    // Register player for packet loss tracking
+    // Delay slightly to ensure player is fully connected
+    plugin.getServer().getScheduler().runTaskLater(plugin, () -> {
+      if (player.isOnline()) {
+        PacketLossTracker.registerPlayer(player);
+      }
+    }, 20L); // 1 second delay
   }
 
   @EventHandler(priority = EventPriority.NORMAL)
@@ -41,5 +50,8 @@ public class PlayerConnectionListener implements Listener {
 
       event.setQuitMessage(quitMessage);
     }
+
+    // Clean up packet loss tracking
+    PacketLossTracker.unregisterPlayer(player);
   }
 }

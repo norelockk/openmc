@@ -4,7 +4,9 @@ import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import pl.openmc.core.Main;
 import pl.openmc.core.config.modules.SidebarConfig;
+import pl.openmc.core.internal.network.PacketLossTracker;
 import pl.openmc.core.internal.server.ServerUtils;
+import pl.openmc.core.internal.time.RealTimeSync;
 import pl.openmc.core.models.modules.Sidebar;
 import pl.openmc.core.utils.TextUtil;
 
@@ -133,6 +135,9 @@ public class SidebarManager {
       
       // Player world
       TextUtil.replaceAll(result, "%player_world%", player.getWorld().getName());
+      
+      // Player packet loss
+      TextUtil.replaceAll(result, "%player_packet_loss%", PacketLossTracker.getFormattedPacketLoss(player));
     }
     
     // Process server placeholders
@@ -145,6 +150,10 @@ public class SidebarManager {
       
       // Server TPS
       TextUtil.replaceAll(result, "%server_tps%", ServerUtils.getServerTPS());
+      
+      // Real-time information (Poland time zone)
+      TextUtil.replaceAll(result, "%real_time%", RealTimeSync.getFormattedTime());
+      TextUtil.replaceAll(result, "%real_date%", RealTimeSync.getFormattedDate());
     }
     
     return result.toString();

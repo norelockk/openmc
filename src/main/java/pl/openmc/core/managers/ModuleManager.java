@@ -4,6 +4,8 @@ import org.bukkit.configuration.ConfigurationSection;
 import pl.openmc.core.modules.BaseModule;
 import pl.openmc.core.Main;
 import pl.openmc.core.modules.ChatBubbleModule;
+import pl.openmc.core.modules.PacketLossModule;
+import pl.openmc.core.modules.RealTimeModule;
 import pl.openmc.core.modules.SidebarModule;
 import pl.openmc.core.modules.VampireModule;
 
@@ -26,6 +28,8 @@ public class ModuleManager {
     registerModule(new ChatBubbleModule(plugin));
     registerModule(new SidebarModule(plugin));
     registerModule(new VampireModule(plugin));
+    registerModule(new RealTimeModule(plugin));
+    registerModule(new PacketLossModule(plugin));
   }
 
   /**

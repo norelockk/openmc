@@ -3,6 +3,8 @@ modules:
     enabled: true
   sidebar:
     enabled: true
+  realtime:
+    enabled: true
   vampire:
     enabled: true
     particles:

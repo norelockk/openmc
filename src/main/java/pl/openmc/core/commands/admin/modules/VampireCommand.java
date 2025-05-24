@@ -133,19 +133,19 @@ public class VampireCommand extends BaseCommand {
    * @param sender The command sender
    */
   private void sendUsage(CommandSender sender) {
-    sender.sendMessage("§6Vampire Mode Commands:");
-    sender.sendMessage("§e/vampire toggle §7- Toggle vampire mode for yourself");
-    sender.sendMessage("§e/vampire on §7- Enable vampire mode for yourself");
-    sender.sendMessage("§e/vampire off §7- Disable vampire mode for yourself");
+    sendMessage(sender, "vampire.help.header");
+    sendMessage(sender, "vampire.help.toggle_self");
+    sendMessage(sender, "vampire.help.on_self");
+    sendMessage(sender, "vampire.help.off_self");
     
     if (sender.hasPermission("openmc.vampire.admin")) {
-      sender.sendMessage("§e/vampire toggle <player> §7- Toggle vampire mode for another player");
-      sender.sendMessage("§e/vampire on <player> §7- Enable vampire mode for another player");
-      sender.sendMessage("§e/vampire off <player> §7- Disable vampire mode for another player");
-      sender.sendMessage("§e/vampire reload §7- Reload the vampire configuration");
+      sendMessage(sender, "vampire.help.toggle_other");
+      sendMessage(sender, "vampire.help.on_other");
+      sendMessage(sender, "vampire.help.off_other");
+      sendMessage(sender, "vampire.help.reload");
     }
     
-    sender.sendMessage("§e/vampire help §7- Show this help message");
+    sendMessage(sender, "vampire.help.help");
   }
 
   /**
@@ -154,11 +154,10 @@ public class VampireCommand extends BaseCommand {
    * @param sender The command sender
    */
   private void sendHelp(CommandSender sender) {
-    sender.sendMessage("§6=== Vampire Mode Help ===");
-    sender.sendMessage("§7Vampire mode gives you:");
-    sender.sendMessage("§7- An anime vampire girl skin");
-    sender.sendMessage("§7- White particle wings");
-    sender.sendMessage("§7- God mode (immunity to damage)");
+    sendMessage(sender, "vampire.help.description_header");
+    sendMessage(sender, "vampire.help.description_skin");
+    sendMessage(sender, "vampire.help.description_wings");
+    sendMessage(sender, "vampire.help.description_godmode");
     sendUsage(sender);
   }
 

@@ -11,6 +11,9 @@ depend: [LuckPerms]
 commands:
   omr:
     permission: openmc.admin.reload
+  vampire:
+    aliases: [vamp]
+    permission: openmc.vampire.use
   chatbubble:
     aliases: [cb]
     permission: openmc.admin.chatbubble

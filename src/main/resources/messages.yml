@@ -60,3 +60,14 @@ messages:
     chat_format: "[%prefix%] %player%: %message%"
     chat_banned_word: "&cTwoja wiadomość zawierała niewłaściwe słownictwo i została zablokowana."
     banned_block: "&cNie możesz %action% bloku &7%block%&c, ponieważ jest on zablokowany."
+    
+  vampire:
+    enabled_self: "&aWłączono tryb wampira! Masz teraz skórkę anime wampirzycy, białe skrzydła z cząsteczek i nieśmiertelność."
+    disabled_self: "&cWyłączono tryb wampira. Twoja skórka i umiejętności zostały przywrócone."
+    enabled_other: "&aWłączono tryb wampira dla gracza &7%player%&a!"
+    disabled_other: "&cWyłączono tryb wampira dla gracza &7%player%&c."
+    enabled_by_other: "&aGracz &7%player%&a włączył dla ciebie tryb wampira!"
+    disabled_by_other: "&cGracz &7%player%&c wyłączył dla ciebie tryb wampira."
+    already_enabled: "&cTryb wampira jest już włączony dla gracza &7%player%&c."
+    already_disabled: "&cTryb wampira jest już wyłączony dla gracza &7%player%&c."
+    config_reloaded: "&aKonfiguracja trybu wampira została przeładowana."

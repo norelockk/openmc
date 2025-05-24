@@ -5,6 +5,7 @@ import pl.openmc.core.modules.BaseModule;
 import pl.openmc.core.Main;
 import pl.openmc.core.modules.ChatBubbleModule;
 import pl.openmc.core.modules.SidebarModule;
+import pl.openmc.core.modules.VampireModule;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -24,6 +25,7 @@ public class ModuleManager {
     // Player modules
     registerModule(new ChatBubbleModule(plugin));
     registerModule(new SidebarModule(plugin));
+    registerModule(new VampireModule(plugin));
   }
 
   /**

@@ -1,12 +1,12 @@
 name: openmc-core
 version: '1.0-SNAPSHOT'
-main: pl.openmc.core.Main
+main: pl.openmc.paper.core.Main
 api-version: '1.20'
 prefix: OpenMC
 load: STARTUP
 authors: [ norelockk ]
 website: https://norelock.dev
-depend: [LuckPerms]
+depend: [LuckPerms, ProtocolLib]
 
 commands:
   omr:

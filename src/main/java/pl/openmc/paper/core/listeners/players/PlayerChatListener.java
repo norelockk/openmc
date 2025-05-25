@@ -1,4 +1,4 @@
-package pl.openmc.core.listeners.players;
+package pl.openmc.paper.core.listeners.players;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.Component;
@@ -8,8 +8,8 @@ import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import pl.openmc.core.Main;
-import pl.openmc.core.utils.TextUtil;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.utils.TextUtil;
 
 public class PlayerChatListener implements Listener {
   private final Main plugin;

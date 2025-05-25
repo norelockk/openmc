@@ -1,9 +1,9 @@
-package pl.openmc.core.managers;
+package pl.openmc.paper.core.managers;
 
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
-import pl.openmc.core.Main;
-import pl.openmc.core.utils.TextUtil;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.utils.TextUtil;
 
 import java.util.HashMap;
 import java.util.Map;

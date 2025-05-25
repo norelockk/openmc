@@ -1,4 +1,4 @@
-package pl.openmc.core.models.player;
+package pl.openmc.paper.core.models.player;
 
 import java.util.HashMap;
 import java.util.Map;

@@ -1,10 +1,10 @@
-package pl.openmc.core.managers;
+package pl.openmc.paper.core.managers;
 
 import org.bukkit.event.Listener;
-import pl.openmc.core.Main;
-import pl.openmc.core.listeners.players.PlayerBlockListener;
-import pl.openmc.core.listeners.players.PlayerChatListener;
-import pl.openmc.core.listeners.players.PlayerConnectionListener;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.listeners.players.PlayerBlockListener;
+import pl.openmc.paper.core.listeners.players.PlayerChatListener;
+import pl.openmc.paper.core.listeners.players.PlayerConnectionListener;
 
 import java.util.ArrayList;
 import java.util.List;

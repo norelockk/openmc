@@ -1,12 +1,12 @@
-package pl.openmc.core.modules;
+package pl.openmc.paper.core.modules;
 
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitTask;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.admin.modules.VampireCommand;
-import pl.openmc.core.config.modules.VampireConfig;
-import pl.openmc.core.listeners.modules.VampireListener;
-import pl.openmc.core.managers.modules.VampireManager;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.admin.modules.VampireCommand;
+import pl.openmc.paper.core.config.modules.VampireConfig;
+import pl.openmc.paper.core.listeners.modules.VampireListener;
+import pl.openmc.paper.core.managers.modules.VampireManager;
 
 public class VampireModule extends BaseModule {
   private VampireListener listener;

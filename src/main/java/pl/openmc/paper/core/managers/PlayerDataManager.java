@@ -1,4 +1,4 @@
-package pl.openmc.core.managers;
+package pl.openmc.paper.core.managers;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -6,9 +6,9 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import pl.openmc.core.Main;
-import pl.openmc.core.models.player.PlayerData;
-import pl.openmc.core.utils.LoggerUtil;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.models.player.PlayerData;
+import pl.openmc.paper.core.utils.LoggerUtil;
 
 import java.io.File;
 import java.io.FileReader;

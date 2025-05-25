@@ -1,6 +1,6 @@
-package pl.openmc.core.modules;
+package pl.openmc.paper.core.modules;
 
-import pl.openmc.core.Main;
+import pl.openmc.paper.core.Main;
 
 public abstract class BaseModule {
   protected final Main plugin;

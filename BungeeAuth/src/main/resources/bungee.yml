@@ -1,0 +1,4 @@
+name: BungeeAuth
+version: '1.0-SNAPSHOT'
+main: pl.openmc.bungee.auth.Main
+author: norelockk

@@ -1,4 +1,4 @@
-package pl.openmc.core.internal.server;
+package pl.openmc.paper.core.internal.server;
 
 import org.bukkit.Bukkit;
 

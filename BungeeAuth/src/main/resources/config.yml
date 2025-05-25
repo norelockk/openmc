@@ -1,0 +1,158 @@
+# Ustawienia bazy danych
+database:
+  host: localhost
+  port: 3306
+  user: root
+  password: password
+  name: minecraft
+
+# Ustawienia serwera
+settings:
+  # Główny serwer, do którego gracze są przenoszeni po uwierzytelnieniu
+  broughtServerName: lobby
+  # Serwer uwierzytelniania, na którym gracze zaczynają
+  authServer: auth
+  # Czy wysyłać anonimowe statystyki użytkowania
+  sendStats: true
+  # Czas trwania sesji automatycznego logowania w minutach (0 aby wyłączyć)
+  sessionDuration: 60
+
+# Ustawienia bezpieczeństwa
+security:
+  # Klucz szyfrowania haseł (NIE ZMIENIAJ PO KONFIGURACJI)
+  encryptionKey: Q3e2M2qq1C6Ku5Bd7DfAA7ZZbnM1R4q5JHE4Jpr5u5M=
+  # Minimalna długość hasła
+  minPasswordLength: 6
+  # Maksymalna długość hasła
+  maxPasswordLength: 32
+  # Czy sprawdzać konta premium
+  checkPremium: true
+  # Czy wymusić automatyczne logowanie dla kont premium
+  forcePremiumAutoLogin: true
+  # Czy zezwalać na logowanie sesyjne (zapamiętywanie IP)
+  allowSessionLogin: true
+  # Limit czasu uwierzytelniania w sekundach (0 aby wyłączyć)
+  authTimeout: 60
+  # Czy pokazywać odliczanie uwierzytelniania na pasku akcji
+  showAuthCountdown: true
+
+# Ustawienia tytułów
+titles:
+  # Czy domyślnie pokazywać tytuły dla nowych użytkowników
+  defaultEnabled: true
+  settings:
+    # Czasy animacji tytułów w tickach (20 ticków = 1 sekunda)
+    fadeIn: 10
+    stayIn: 70
+    fadeOut: 20
+  premium:
+    title: "&6Konto Premium"
+    subtitle: "&aZostałeś automatycznie zalogowany"
+  nonpremium:
+    title: "&eKonto Non-Premium"
+    subtitle: "&aZostałeś zalogowany"
+
+# Wiadomości
+messages:
+  # Prefiks wiadomości
+  prefix: "&8[&6UBA&8] &r"
+  # Wiadomość logowania
+  login: "&cZaloguj się używając &6/login <hasło>"
+  # Wiadomość rejestracji
+  register: "&cZarejestruj się używając &6/register <hasło> <hasło>"
+  # Wiadomość kolejki priorytetowej
+  prioritybrought: "&aZostałeś połączony z priorytetem!"
+  # Wiadomość kolejki
+  inqueue: "&eJesteś w kolejce: &6{QUEUE} &7(&f{TIME}&7)"
+  # Wiadomość sukcesu logowania
+  loginSuccess: "&aPomyślnie zalogowano!"
+  # Wiadomość niepowodzenia logowania
+  loginFailure: "&cNieprawidłowe hasło! Spróbuj ponownie."
+  # Wiadomość sukcesu rejestracji
+  registerSuccess: "&aPomyślnie zarejestrowano!"
+  # Wiadomość niepowodzenia rejestracji
+  registerFailure: "&cHasła nie pasują do siebie lub są za krótkie!"
+  # Wiadomość wykrycia konta premium
+  premiumDetected: "&aZostałeś wykryty jako konto premium!"
+  # Wiadomość ustawienia konta premium
+  premiumSet: "&aZostałeś ustawiony jako konto premium!"
+  # Wiadomość ustawienia konta non-premium
+  nonPremiumSet: "&aZostałeś ustawiony jako konto non-premium!"
+  # Wiadomość włączenia tytułów
+  titlesEnabled: "&aTytuły zostały włączone!"
+  # Wiadomość wyłączenia tytułów
+  titlesDisabled: "&aTytuły zostały wyłączone!"
+  # Wiadomość zmiany hasła
+  passwordChanged: "&aTwoje hasło zostało zmienione!"
+  # Wiadomość nieprawidłowego hasła
+  incorrectPassword: "&cObecne hasło jest nieprawidłowe!"
+  # Wiadomość tego samego hasła
+  samePassword: "&cNie możesz zmienić hasła na to samo!"
+  # Wiadomość długości hasła
+  passwordLength: "&cNowe hasło musi mieć od {MIN} do {MAX} znaków!"
+  # Wiadomość błędu zmiany hasła
+  passwordChangeError: "&cNie udało się zmienić hasła. Spróbuj ponownie później."
+  # Wiadomość błędu wyrejestrowania
+  unregisterError: "&cNie udało się wyrejestrować. Spróbuj ponownie później."
+  # Wiadomość pomocy premium (gdy już premium)
+  premiumHelp: "&aTwoje konto jest obecnie ustawione na status &6PREMIUM&a.\n&7Jeśli chcesz wyłączyć tryb premium, wpisz &c/premium off"
+  # Wiadomość pomocy non-premium
+  nonPremiumHelp: "&aPotwierdź, że chcesz zmienić swój status na &6PREMIUM\n&7Jeśli nie masz konta &6PREMIUM &7zignoruj to\n&7Aby potwierdzić, wpisz &a/premium on"
+  # Wiadomość już premium
+  alreadyPremium: "&cTwoje konto jest już w trybie premium!"
+  # Wiadomość nie premium
+  notPremium: "&cTwoje konto nie jest w trybie premium!"
+  # Wiadomość błędu premium
+  premiumError: "&cNie udało się włączyć trybu premium. Spróbuj ponownie później."
+  # Wiadomość błędu non-premium
+  nonPremiumError: "&cNie udało się wyłączyć trybu premium. Spróbuj ponownie później."
+  # Wiadomość błędu tytułów
+  titlesError: "&cNie udało się przełączyć tytułów. Spróbuj ponownie później."
+  # Wiadomość błędu dla rozłączeń
+  errorDisconnect: "&cWystąpił błąd. Połącz się ponownie."
+  # Wiadomość wyrejestrowania
+  unregistered: "&aZostałeś wyrejestrowany!"
+  # Wiadomość już zalogowany
+  alreadyLoggedIn: "&cJesteś już zalogowany!"
+  # Wiadomość już zarejestrowany
+  alreadyRegistered: "&cJesteś już zarejestrowany!"
+  # Wiadomość nie zarejestrowany
+  notRegistered: "&cNie jesteś zarejestrowany! Najpierw się zarejestruj."
+  # Wiadomość nie zalogowany
+  notLoggedIn: "&cNie jesteś zalogowany! Najpierw się zaloguj."
+  # Wiadomość braku uprawnień
+  noPermission: "&cNie masz uprawnień do użycia tej komendy!"
+  # Wiadomość limitu czasu uwierzytelniania
+  authTimeout: "&cZostałeś wyrzucony za zbyt długie oczekiwanie na uwierzytelnienie."
+  # Wiadomość odliczania uwierzytelniania (pokazywana na pasku akcji)
+  authCountdown: "&e{TIME} sekund na uwierzytelnienie"
+  # Wiadomości użycia komend
+  usageLogin: "&cUżycie: /login <hasło>"
+  usageRegister: "&cUżycie: /register <hasło> <hasło>"
+  usageChangePassword: "&cUżycie: /changepassword <stareHasło> <noweHasło> <noweHasło>"
+  usageUnregister: "&cUżycie: /unregister <hasło>"
+  usagePremium: "&cUżycie: /premium <on/off>"
+  usageTitles: "&cUżycie: /titles <on/off>"
+
+# Aliasy komend
+commands:
+  login:
+    - "l"
+  register:
+    - "reg"
+  changepassword:
+    - "changepw"
+    - "cp"
+  unregister:
+    - "unreg"
+  premium:
+    - "prem"
+  titles:
+    - "title"
+
+# Ustawienia debugowania
+debug:
+  # Czy włączyć logowanie debugowania
+  enabled: false
+  # Poziom logowania debugowania (INFO, FINE, FINER, FINEST)
+  level: FINE

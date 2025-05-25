@@ -1,4 +1,4 @@
-package pl.openmc.core.listeners.modules;
+package pl.openmc.paper.core.listeners.modules;
 
 import io.papermc.paper.event.player.AsyncChatEvent;
 import net.kyori.adventure.text.TextComponent;
@@ -8,8 +8,8 @@ import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerCommandPreprocessEvent;
 import org.bukkit.event.server.ServerCommandEvent;
-import pl.openmc.core.Main;
-import pl.openmc.core.managers.modules.ChatBubbleManager;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.managers.modules.ChatBubbleManager;
 
 public class ChatBubbleListener implements Listener {
   private final Main plugin;

@@ -1,8 +1,8 @@
-package pl.openmc.core.managers;
+package pl.openmc.paper.core.managers;
 
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import pl.openmc.core.Main;
+import pl.openmc.paper.core.Main;
 
 import java.io.File;
 import java.io.IOException;

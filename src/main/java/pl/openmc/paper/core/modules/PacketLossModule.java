@@ -1,11 +1,11 @@
-package pl.openmc.core.modules;
+package pl.openmc.paper.core.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitTask;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.admin.modules.PacketLossCommand;
-import pl.openmc.core.internal.network.PacketLossTracker;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.admin.modules.PacketLossCommand;
+import pl.openmc.paper.core.internal.network.PacketLossTracker;
 
 public class PacketLossModule extends BaseModule {
   private BukkitTask updateTask;

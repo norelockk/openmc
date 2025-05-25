@@ -1,4 +1,4 @@
-package pl.openmc.core.commands;
+package pl.openmc.paper.core.commands;
 
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -6,7 +6,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
-import pl.openmc.core.Main;
+import pl.openmc.paper.core.Main;
 
 import java.util.ArrayList;
 import java.util.List;

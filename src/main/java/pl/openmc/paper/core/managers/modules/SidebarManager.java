@@ -1,14 +1,14 @@
-package pl.openmc.core.managers.modules;
+package pl.openmc.paper.core.managers.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
-import pl.openmc.core.Main;
-import pl.openmc.core.config.modules.SidebarConfig;
-import pl.openmc.core.internal.network.PacketLossTracker;
-import pl.openmc.core.internal.server.ServerUtils;
-import pl.openmc.core.internal.time.RealTimeSync;
-import pl.openmc.core.models.modules.Sidebar;
-import pl.openmc.core.utils.TextUtil;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.config.modules.SidebarConfig;
+import pl.openmc.paper.core.internal.network.PacketLossTracker;
+import pl.openmc.paper.core.internal.server.ServerUtils;
+import pl.openmc.paper.core.internal.time.RealTimeSync;
+import pl.openmc.paper.core.models.modules.Sidebar;
+import pl.openmc.paper.core.utils.TextUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

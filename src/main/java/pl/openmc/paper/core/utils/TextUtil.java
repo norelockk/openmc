@@ -1,4 +1,4 @@
-package pl.openmc.core.utils;
+package pl.openmc.paper.core.utils;
 
 import java.util.ArrayList;
 import java.util.List;

@@ -1,7 +1,7 @@
-package pl.openmc.core.api;
+package pl.openmc.paper.core.api;
 
 import org.bukkit.entity.Player;
-import pl.openmc.core.models.player.PlayerData;
+import pl.openmc.paper.core.models.player.PlayerData;
 
 import java.util.Optional;
 import java.util.UUID;

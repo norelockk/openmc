@@ -1,4 +1,4 @@
-package pl.openmc.core.api;
+package pl.openmc.paper.core.api;
 
 import net.luckperms.api.LuckPerms;
 import net.luckperms.api.model.group.Group;

@@ -1,4 +1,4 @@
-package pl.openmc.core.listeners.modules;
+package pl.openmc.paper.core.listeners.modules;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
@@ -7,8 +7,8 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerChangedWorldEvent;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
-import pl.openmc.core.Main;
-import pl.openmc.core.managers.modules.SidebarManager;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.managers.modules.SidebarManager;
 
 public class SidebarListener implements Listener {
   private final Main plugin;

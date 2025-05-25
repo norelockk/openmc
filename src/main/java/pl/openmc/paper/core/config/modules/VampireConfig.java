@@ -1,7 +1,7 @@
-package pl.openmc.core.config.modules;
+package pl.openmc.paper.core.config.modules;
 
 import org.bukkit.configuration.file.FileConfiguration;
-import pl.openmc.core.Main;
+import pl.openmc.paper.core.Main;
 
 /**
  * Configuration for the Vampire module.

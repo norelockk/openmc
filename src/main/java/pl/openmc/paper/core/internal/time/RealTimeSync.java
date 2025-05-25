@@ -1,4 +1,4 @@
-package pl.openmc.core.internal.time;
+package pl.openmc.paper.core.internal.time;
 
 import org.bukkit.World;
 

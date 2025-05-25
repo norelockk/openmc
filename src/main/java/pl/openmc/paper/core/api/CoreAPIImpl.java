@@ -1,10 +1,10 @@
-package pl.openmc.core.api;
+package pl.openmc.paper.core.api;
 
 import net.luckperms.api.LuckPerms;
 import org.bukkit.entity.Player;
-import pl.openmc.core.Main;
-import pl.openmc.core.managers.PlayerDataManager;
-import pl.openmc.core.models.player.PlayerData;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.managers.PlayerDataManager;
+import pl.openmc.paper.core.models.player.PlayerData;
 
 import java.util.Optional;
 import java.util.UUID;

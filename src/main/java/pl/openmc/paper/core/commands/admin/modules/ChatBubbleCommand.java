@@ -1,10 +1,10 @@
-package pl.openmc.core.commands.admin.modules;
+package pl.openmc.paper.core.commands.admin.modules;
 
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.BaseCommand;
-import pl.openmc.core.modules.ChatBubbleModule;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.BaseCommand;
+import pl.openmc.paper.core.modules.ChatBubbleModule;
 
 import java.util.ArrayList;
 import java.util.Arrays;

@@ -1,4 +1,4 @@
-package pl.openmc.core.managers.modules;
+package pl.openmc.paper.core.managers.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
@@ -7,11 +7,11 @@ import org.bukkit.World;
 import org.bukkit.entity.Player;
 import org.bukkit.event.entity.EntityDamageEvent;
 import org.bukkit.util.Vector;
-import pl.openmc.core.Main;
-import pl.openmc.core.config.modules.VampireConfig;
-import pl.openmc.core.models.WingShape;
-import pl.openmc.core.models.WingParticle;
-import pl.openmc.core.models.player.PlayerData;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.config.modules.VampireConfig;
+import pl.openmc.paper.core.models.WingShape;
+import pl.openmc.paper.core.models.WingParticle;
+import pl.openmc.paper.core.models.player.PlayerData;
 
 import java.util.HashSet;
 import java.util.Set;

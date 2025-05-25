@@ -1,14 +1,14 @@
-package pl.openmc.core.modules;
+package pl.openmc.paper.core.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitTask;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.admin.modules.SidebarCommand;
-import pl.openmc.core.config.modules.SidebarConfig;
-import pl.openmc.core.listeners.modules.SidebarListener;
-import pl.openmc.core.managers.modules.SidebarManager;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.admin.modules.SidebarCommand;
+import pl.openmc.paper.core.config.modules.SidebarConfig;
+import pl.openmc.paper.core.listeners.modules.SidebarListener;
+import pl.openmc.paper.core.managers.modules.SidebarManager;
 
 public class SidebarModule extends BaseModule {
   private SidebarListener listener;

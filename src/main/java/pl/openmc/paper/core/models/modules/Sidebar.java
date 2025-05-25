@@ -1,4 +1,4 @@
-package pl.openmc.core.models.modules;
+package pl.openmc.paper.core.models.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
@@ -8,7 +8,7 @@ import org.bukkit.scoreboard.Objective;
 import org.bukkit.scoreboard.RenderType;
 import org.bukkit.scoreboard.Scoreboard;
 import org.bukkit.scoreboard.Team;
-import pl.openmc.core.utils.TextUtil;
+import pl.openmc.paper.core.utils.TextUtil;
 
 import java.util.ArrayList;
 import java.util.HashMap;

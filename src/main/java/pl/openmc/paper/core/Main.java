@@ -1,17 +1,17 @@
-package pl.openmc.core;
+package pl.openmc.paper.core;
 
 import net.luckperms.api.LuckPerms;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
-import pl.openmc.core.api.CoreAPI;
-import pl.openmc.core.api.CoreAPIImpl;
-import pl.openmc.core.managers.CommandManager;
-import pl.openmc.core.managers.ConfigManager;
-import pl.openmc.core.managers.ListenerManager;
-import pl.openmc.core.managers.MessageManager;
-import pl.openmc.core.managers.ModuleManager;
-import pl.openmc.core.managers.PlayerDataManager;
-import pl.openmc.core.utils.LoggerUtil;
+import pl.openmc.paper.core.api.CoreAPI;
+import pl.openmc.paper.core.api.CoreAPIImpl;
+import pl.openmc.paper.core.managers.CommandManager;
+import pl.openmc.paper.core.managers.ConfigManager;
+import pl.openmc.paper.core.managers.ListenerManager;
+import pl.openmc.paper.core.managers.MessageManager;
+import pl.openmc.paper.core.managers.ModuleManager;
+import pl.openmc.paper.core.managers.PlayerDataManager;
+import pl.openmc.paper.core.utils.LoggerUtil;
 
 public final class Main extends JavaPlugin {
   private static Main instance;

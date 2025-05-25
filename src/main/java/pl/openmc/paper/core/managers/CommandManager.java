@@ -1,9 +1,9 @@
-package pl.openmc.core.managers;
+package pl.openmc.paper.core.managers;
 
 import org.bukkit.command.PluginCommand;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.BaseCommand;
-import pl.openmc.core.commands.admin.ReloadCommand;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.BaseCommand;
+import pl.openmc.paper.core.commands.admin.ReloadCommand;
 
 import java.util.HashMap;
 import java.util.Map;

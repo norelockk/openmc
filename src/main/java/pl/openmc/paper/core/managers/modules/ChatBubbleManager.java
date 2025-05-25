@@ -1,4 +1,4 @@
-package pl.openmc.core.managers.modules;
+package pl.openmc.paper.core.managers.modules;
 
 import net.md_5.bungee.api.ChatColor;
 import org.bukkit.Location;
@@ -8,10 +8,10 @@ import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.metadata.FixedMetadataValue;
-import pl.openmc.core.Main;
-import pl.openmc.core.config.modules.ChatBubbleConfig;
-import pl.openmc.core.models.modules.ChatBubble;
-import pl.openmc.core.utils.TextUtil;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.config.modules.ChatBubbleConfig;
+import pl.openmc.paper.core.models.modules.ChatBubble;
+import pl.openmc.paper.core.utils.TextUtil;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;

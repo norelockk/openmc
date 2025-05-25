@@ -1,4 +1,4 @@
-package pl.openmc.core.internal.network;
+package pl.openmc.paper.core.internal.network;
 
 import com.comphenix.protocol.PacketType;
 import com.comphenix.protocol.ProtocolLibrary;

@@ -1,13 +1,13 @@
-package pl.openmc.core.modules;
+package pl.openmc.paper.core.modules;
 
 import org.bukkit.entity.Player;
 import org.bukkit.event.HandlerList;
 import org.bukkit.scheduler.BukkitTask;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.admin.modules.ChatBubbleCommand;
-import pl.openmc.core.config.modules.ChatBubbleConfig;
-import pl.openmc.core.listeners.modules.ChatBubbleListener;
-import pl.openmc.core.managers.modules.ChatBubbleManager;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.admin.modules.ChatBubbleCommand;
+import pl.openmc.paper.core.config.modules.ChatBubbleConfig;
+import pl.openmc.paper.core.listeners.modules.ChatBubbleListener;
+import pl.openmc.paper.core.managers.modules.ChatBubbleManager;
 
 public class ChatBubbleModule extends BaseModule {
   private ChatBubbleListener listener;

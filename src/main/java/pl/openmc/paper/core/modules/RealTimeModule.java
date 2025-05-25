@@ -1,12 +1,12 @@
-package pl.openmc.core.modules;
+package pl.openmc.paper.core.modules;
 
 import org.bukkit.Bukkit;
 import org.bukkit.World;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.scheduler.BukkitTask;
-import pl.openmc.core.Main;
-import pl.openmc.core.commands.admin.modules.RealTimeCommand;
-import pl.openmc.core.internal.time.RealTimeSync;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.commands.admin.modules.RealTimeCommand;
+import pl.openmc.paper.core.internal.time.RealTimeSync;
 
 import java.util.ArrayList;
 import java.util.List;

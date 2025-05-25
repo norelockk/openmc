@@ -1,13 +1,13 @@
-package pl.openmc.core.managers;
+package pl.openmc.paper.core.managers;
 
 import org.bukkit.configuration.ConfigurationSection;
-import pl.openmc.core.modules.BaseModule;
-import pl.openmc.core.Main;
-import pl.openmc.core.modules.ChatBubbleModule;
-import pl.openmc.core.modules.PacketLossModule;
-import pl.openmc.core.modules.RealTimeModule;
-import pl.openmc.core.modules.SidebarModule;
-import pl.openmc.core.modules.VampireModule;
+import pl.openmc.paper.core.modules.BaseModule;
+import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.modules.ChatBubbleModule;
+import pl.openmc.paper.core.modules.PacketLossModule;
+import pl.openmc.paper.core.modules.RealTimeModule;
+import pl.openmc.paper.core.modules.SidebarModule;
+import pl.openmc.paper.core.modules.VampireModule;
 
 import java.util.HashMap;
 import java.util.Map;

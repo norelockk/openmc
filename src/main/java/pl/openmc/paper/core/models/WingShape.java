@@ -1,4 +1,4 @@
-package pl.openmc.core.models;
+package pl.openmc.paper.core.models;
 
 import java.util.List;
 

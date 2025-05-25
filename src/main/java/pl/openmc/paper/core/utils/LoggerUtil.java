@@ -1,6 +1,6 @@
-package pl.openmc.core.utils;
+package pl.openmc.paper.core.utils;
 
-import pl.openmc.core.Main;
+import pl.openmc.paper.core.Main;
 
 public class LoggerUtil {
   private final Main plugin;

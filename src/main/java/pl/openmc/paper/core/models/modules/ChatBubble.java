@@ -1,4 +1,4 @@
-package pl.openmc.core.models.modules;
+package pl.openmc.paper.core.models.modules;
 
 import org.bukkit.entity.ArmorStand;
 

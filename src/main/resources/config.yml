@@ -11,3 +11,18 @@ blocks:
 messages:
   custom-join-message: false
   custom-quit-message: false
+
+# Database configuration
+database:
+  # MySQL configuration
+  mysql:
+    enabled: false
+    host: localhost
+    port: 3306
+    database: minecraft
+    username: root
+    password: password
+    prefix: core_
+
+  # Auto-save interval in minutes
+  auto-save-interval: 5

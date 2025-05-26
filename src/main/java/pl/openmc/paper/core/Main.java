@@ -5,6 +5,8 @@ import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.openmc.paper.core.api.CoreAPI;
 import pl.openmc.paper.core.api.CoreAPIImpl;
+import pl.openmc.paper.core.database.PlayerDataStore;
+import pl.openmc.paper.core.database.StoreMode;
 import pl.openmc.paper.core.managers.CommandManager;
 import pl.openmc.paper.core.managers.ConfigManager;
 import pl.openmc.paper.core.managers.ListenerManager;
@@ -21,6 +23,7 @@ public final class Main extends JavaPlugin {
   private ModuleManager moduleManager;
   private MessageManager messageManager;
   private PlayerDataManager playerDataManager;
+  private PlayerDataStore playerDataStore;
   private CoreAPI coreAPI;
   private LoggerUtil logger;
 
@@ -34,30 +37,44 @@ public final class Main extends JavaPlugin {
     configManager.loadConfigs();
 
     this.messageManager = new MessageManager(this);
-    
+
+    // Initialize database store
+    boolean useMySQL = getConfig().getBoolean("database.mysql.enabled", false);
+    if (useMySQL) {
+      String host = getConfig().getString("database.mysql.host", "localhost");
+      int port = getConfig().getInt("database.mysql.port", 3306);
+      String database = getConfig().getString("database.mysql.database", "minecraft");
+      String username = getConfig().getString("database.mysql.username", "root");
+      String password = getConfig().getString("database.mysql.password", "");
+      String prefix = getConfig().getString("database.mysql.prefix", "");
+
+      this.playerDataStore = new PlayerDataStore(this, StoreMode.MYSQL, host, port, database, username, password,
+          prefix);
+    } else {
+      this.playerDataStore = new PlayerDataStore(this);
+    }
+
     // Initialize player data manager
     this.playerDataManager = new PlayerDataManager(this);
-    
+
     // Get LuckPerms API
     RegisteredServiceProvider<LuckPerms> provider = getServer().getServicesManager().getRegistration(LuckPerms.class);
     if (provider == null) {
-        logger.severe("LuckPerms not found! Make sure it's installed and loaded before this plugin.");
-        getServer().getPluginManager().disablePlugin(this);
-        return;
+      logger.severe("LuckPerms not found! Make sure it's installed and loaded before this plugin.");
+      getServer().getPluginManager().disablePlugin(this);
+      return;
     }
     LuckPerms luckPerms = provider.getProvider();
 
-    
     // Initialize API
     this.coreAPI = new CoreAPIImpl(this, playerDataManager, luckPerms);
-    
+
     // Register API service
     getServer().getServicesManager().register(
-        CoreAPI.class, 
-        coreAPI, 
-        this, 
-        org.bukkit.plugin.ServicePriority.Normal
-    );
+        CoreAPI.class,
+        coreAPI,
+        this,
+        org.bukkit.plugin.ServicePriority.Normal);
 
     this.moduleManager = new ModuleManager(this);
     this.commandManager = new CommandManager(this);
@@ -76,10 +93,15 @@ public final class Main extends JavaPlugin {
   public void onDisable() {
     configManager.saveConfigs();
     moduleManager.unloadModules();
-    
+
     // Save all player data
     if (playerDataManager != null) {
       playerDataManager.shutdown();
+    }
+
+    // Close database connection
+    if (playerDataStore != null) {
+      playerDataStore.shutdown();
     }
 
     logger.info("Core unloaded");
@@ -112,12 +134,16 @@ public final class Main extends JavaPlugin {
   public LoggerUtil getPluginLogger() {
     return logger;
   }
-  
+
   public PlayerDataManager getPlayerDataManager() {
     return playerDataManager;
   }
-  
+
   public CoreAPI getCoreAPI() {
     return coreAPI;
+  }
+
+  public PlayerDataStore getPlayerDataStore() {
+    return playerDataStore;
   }
 }

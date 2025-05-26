@@ -7,6 +7,7 @@ import org.bukkit.event.Listener;
 import org.bukkit.event.player.PlayerJoinEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.database.PlayerDataStore;
 import pl.openmc.paper.core.models.player.PlayerData;
 import pl.openmc.paper.core.utils.LoggerUtil;
 
@@ -18,6 +19,7 @@ import java.util.Map;
 import java.util.Properties;
 import java.util.UUID;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
 
 /**
  * Manages player data storage, loading, and saving.
@@ -27,6 +29,7 @@ public class PlayerDataManager implements Listener {
   private final LoggerUtil logger;
   private final Map<UUID, PlayerData> playerDataMap;
   private final File dataFolder;
+  private final PlayerDataStore playerDataStore;
 
   /**
    * Creates a new PlayerDataManager.
@@ -38,6 +41,7 @@ public class PlayerDataManager implements Listener {
     this.logger = plugin.getPluginLogger();
     this.playerDataMap = new ConcurrentHashMap<>();
     this.dataFolder = new File(plugin.getDataFolder(), "playerdata");
+    this.playerDataStore = plugin.getPlayerDataStore();
 
     // Create the data folder if it doesn't exist
     if (!dataFolder.exists()) {
@@ -53,7 +57,8 @@ public class PlayerDataManager implements Listener {
     }
 
     // Schedule regular saving
-    Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::saveAllPlayerData, 6000L, 6000L); // Save every 5 minutes
+    Bukkit.getScheduler().runTaskTimerAsynchronously(plugin, this::saveAllPlayerData, 6000L, 6000L); // Save every 5
+                                                                                                     // minutes
   }
 
   /**
@@ -93,20 +98,34 @@ public class PlayerDataManager implements Listener {
     // Create a new player data object
     PlayerData playerData = new PlayerData(uuid, player.getName());
 
-    // Try to load existing data
-    File playerFile = new File(dataFolder, uuid.toString() + ".properties");
-    if (playerFile.exists()) {
-      try (FileReader reader = new FileReader(playerFile)) {
-        Properties properties = new Properties();
-        properties.load(reader);
+    // Try to load from database first
+    try {
+      PlayerData dbPlayerData = playerDataStore.loadPlayerData(uuid).get();
+      if (dbPlayerData != null) {
+        playerData = dbPlayerData;
+        logger.info("Loaded player data from database for " + player.getName());
+      } else {
+        // If not in database, try to load from file (legacy support)
+        File playerFile = new File(dataFolder, uuid.toString() + ".properties");
+        if (playerFile.exists()) {
+          try (FileReader reader = new FileReader(playerFile)) {
+            Properties properties = new Properties();
+            properties.load(reader);
 
-        // Load basic properties
-        playerData.setPoints(Integer.parseInt(properties.getProperty("points", "0")));
+            // Load basic properties
+            playerData.setPoints(Integer.parseInt(properties.getProperty("points", "0")));
 
-        logger.info("Loaded player data for " + player.getName());
-      } catch (IOException e) {
-        logger.severe("Failed to load player data for " + player.getName());
+            logger.info("Loaded player data from file for " + player.getName());
+
+            // Save to database for future use
+            playerDataStore.savePlayerData(playerData);
+          } catch (IOException e) {
+            logger.severe("Failed to load player data from file for " + player.getName());
+          }
+        }
       }
+    } catch (InterruptedException | ExecutionException e) {
+      logger.severe("Failed to load player data from database for " + player.getName() + ": " + e.getMessage());
     }
 
     // Store in map
@@ -120,6 +139,15 @@ public class PlayerDataManager implements Listener {
    * @param playerData The player data to save
    */
   public void savePlayerData(PlayerData playerData) {
+    // Save to database
+    playerDataStore.savePlayerData(playerData).thenRun(() -> {
+      logger.info("Saved player data to database for " + playerData.getPlayerName());
+    }).exceptionally(e -> {
+      logger.severe("Failed to save player data to database for " + playerData.getPlayerName() + ": " + e.getMessage());
+      return null;
+    });
+
+    // Also save to file as backup
     File playerFile = new File(dataFolder, playerData.getPlayerUUID().toString() + ".properties");
 
     try (FileWriter writer = new FileWriter(playerFile)) {
@@ -139,9 +167,9 @@ public class PlayerDataManager implements Listener {
       }
 
       properties.store(writer, "Player data for " + playerData.getPlayerName());
-      logger.info("Saved player data for " + playerData.getPlayerName());
+      logger.info("Saved player data to file for " + playerData.getPlayerName());
     } catch (IOException e) {
-      logger.severe("Failed to save player data for " + playerData.getPlayerName());
+      logger.severe("Failed to save player data to file for " + playerData.getPlayerName() + ": " + e.getMessage());
     }
   }
 

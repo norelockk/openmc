@@ -1,8 +1,10 @@
 package pl.openmc.paper.core.api;
 
 import org.bukkit.entity.Player;
+import pl.openmc.paper.core.database.Store;
 import pl.openmc.paper.core.models.player.PlayerData;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -113,4 +115,45 @@ public interface CoreAPI {
    * @return The player's points
    */
   int getPoints(Player player);
+
+  /**
+   * Gets the database store.
+   *
+   * @return The database store
+   */
+  Store getDatabaseStore();
+
+  /**
+   * Loads player data from the database.
+   *
+   * @param uuid The UUID of the player
+   * @return A CompletableFuture that will be completed with the loaded PlayerData
+   */
+  CompletableFuture<PlayerData> loadPlayerDataFromDatabase(UUID uuid);
+
+  /**
+   * Saves player data to the database.
+   *
+   * @param playerData The player data to save
+   * @return A CompletableFuture that will be completed when the save operation is
+   *         done
+   */
+  CompletableFuture<Void> savePlayerDataToDatabase(PlayerData playerData);
+
+  /**
+   * Gets all player data from the database.
+   *
+   * @return A CompletableFuture that will be completed with a list of all
+   *         PlayerData
+   */
+  CompletableFuture<List<PlayerData>> getAllPlayerDataFromDatabase();
+
+  /**
+   * Deletes player data from the database.
+   *
+   * @param uuid The UUID of the player
+   * @return A CompletableFuture that will be completed with a boolean indicating
+   *         success
+   */
+  CompletableFuture<Boolean> deletePlayerDataFromDatabase(UUID uuid);
 }

@@ -3,9 +3,12 @@ package pl.openmc.paper.core.api;
 import net.luckperms.api.LuckPerms;
 import org.bukkit.entity.Player;
 import pl.openmc.paper.core.Main;
+import pl.openmc.paper.core.database.PlayerDataStore;
+import pl.openmc.paper.core.database.Store;
 import pl.openmc.paper.core.managers.PlayerDataManager;
 import pl.openmc.paper.core.models.player.PlayerData;
 
+import java.util.List;
 import java.util.Optional;
 import java.util.UUID;
 import java.util.concurrent.CompletableFuture;
@@ -16,6 +19,7 @@ import java.util.concurrent.CompletableFuture;
 public class CoreAPIImpl implements CoreAPI {
   private final Main plugin;
   private final PlayerDataManager playerDataManager;
+  private final PlayerDataStore playerDataStore;
   private final LuckPermsAPI luckPermsAPI;
 
   /**
@@ -28,6 +32,7 @@ public class CoreAPIImpl implements CoreAPI {
   public CoreAPIImpl(Main plugin, PlayerDataManager playerDataManager, LuckPerms luckPerms) {
     this.plugin = plugin;
     this.playerDataManager = playerDataManager;
+    this.playerDataStore = plugin.getPlayerDataStore();
     this.luckPermsAPI = new LuckPermsAPI(luckPerms);
   }
 
@@ -98,5 +103,30 @@ public class CoreAPIImpl implements CoreAPI {
       return playerData.getPoints();
     }
     return 0;
+  }
+
+  @Override
+  public Store getDatabaseStore() {
+    return playerDataStore.getStore();
+  }
+
+  @Override
+  public CompletableFuture<PlayerData> loadPlayerDataFromDatabase(UUID uuid) {
+    return playerDataStore.loadPlayerData(uuid);
+  }
+
+  @Override
+  public CompletableFuture<Void> savePlayerDataToDatabase(PlayerData playerData) {
+    return playerDataStore.savePlayerData(playerData);
+  }
+
+  @Override
+  public CompletableFuture<List<PlayerData>> getAllPlayerDataFromDatabase() {
+    return playerDataStore.getAllPlayerData();
+  }
+
+  @Override
+  public CompletableFuture<Boolean> deletePlayerDataFromDatabase(UUID uuid) {
+    return playerDataStore.deletePlayerData(uuid);
   }
 }

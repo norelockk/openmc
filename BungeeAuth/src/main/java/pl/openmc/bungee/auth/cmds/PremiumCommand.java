@@ -14,6 +14,7 @@ import pl.openmc.bungee.auth.Main;
 import pl.openmc.bungee.auth.data.User;
 import pl.openmc.bungee.auth.managers.UserManager;
 import pl.openmc.bungee.auth.utils.MessageFormatter;
+import pl.openmc.bungee.auth.utils.Util;
 
 /**
  * Command for setting a player's account to premium status
@@ -153,6 +154,13 @@ public class PremiumCommand extends Command {
     if (user.isPremium()) {
       MessageFormatter.sendConfigMessage(player, MSG_ALREADY_PREMIUM,
           "&cYour account is already set to premium mode!");
+      return;
+    }
+
+    boolean isPremium = Util.hasPaid(player.getName());
+    if (!isPremium) {
+      MessageFormatter.sendConfigMessage(player, MSG_NOT_PREMIUM,
+          "&cYour account is not in premium mode!");
       return;
     }
 

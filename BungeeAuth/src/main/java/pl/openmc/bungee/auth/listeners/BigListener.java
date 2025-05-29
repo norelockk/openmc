@@ -130,8 +130,10 @@ public class BigListener implements Listener {
       }
     } else {
       // Non-premium account
-      if (user != null && user.isLogged() && user.isPremium()) {
-        user.setLogged(false);
+      if (user != null && user.isPremium()) {
+        if (user.isLogged())
+          user.setLogged(false);
+          
         user.setPremium(false);
         LOGGER.warning("User " + playerName + " was marked as premium but failed premium verification, took away premium status");
       }

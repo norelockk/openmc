@@ -26,6 +26,7 @@ import pl.openmc.bungee.auth.managers.AuthTimeoutManager;
 import pl.openmc.bungee.auth.managers.QueueManager;
 import pl.openmc.bungee.auth.managers.UserManager;
 import pl.openmc.bungee.auth.tasks.AsyncPremiumTask;
+import pl.openmc.bungee.auth.utils.Util;
 import pl.openmc.bungee.auth.utils.MessageFormatter;
 import pl.openmc.bungee.auth.utils.UUIDFetcher;
 
@@ -78,15 +79,44 @@ public class BigListener implements Listener {
       }
     }
 
-    // Handle premium users
+    // Check if user exists in database
     User user = UserManager.getUser(playerName);
-    if (user != null && user.isPremium()) {
+    
+    // Check if the player has a premium account using Mojang API
+    boolean isPremium = Util.hasPaid(playerName);
+    LOGGER.info("Premium check for " + playerName + ": " + (isPremium ? "PREMIUM" : "NON-PREMIUM"));
+    
+    if (isPremium) {
+      // If premium account, create or update user as premium
+      if (user == null) {
+        // Create new user and set as premium
+        user = UserManager.createUser(playerName);
+        if (user != null) {
+          user.setPremium(true);
+          user.setRegistered(true);
+          LOGGER.info("Automatically registered premium account: " + playerName);
+        }
+      } else if (!user.isPremium()) {
+        // Update existing user to premium
+        user.setPremium(true);
+        user.setRegistered(true);
+        LOGGER.info("Updated existing account to premium: " + playerName);
+      }
+      
+      // Handle premium login
       handlePremiumLogin(event);
       return;
+    } else {
+      // Non-premium account
+      if (user != null && user.isPremium()) {
+        // User was marked as premium but isn't actually premium
+        LOGGER.warning("User " + playerName + " was marked as premium but failed premium verification");
+        // Continue with non-premium login but keep premium status for now
+      }
+      
+      // Handle non-premium login
+      handleNonPremiumLogin(event);
     }
-
-    // Handle non-premium users
-    handleNonPremiumLogin(event);
   }
 
   /**
@@ -117,9 +147,8 @@ public class BigListener implements Listener {
       UUID playerUuid = event.getConnection().getUniqueId();
       User user = UserManager.getUser(playerUuid);
 
-      if (user == null) {
-        UserManager.createUser(event.getConnection().getName());
-      }
+      // We don't automatically create users for non-premium accounts anymore
+      // They need to register manually
     } else {
       // Check by name
       String playerName = event.getConnection().getName();

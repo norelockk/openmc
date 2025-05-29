@@ -55,7 +55,7 @@ titles:
 # Wiadomości
 messages:
   # Prefiks wiadomości
-  prefix: "&8[&6UBA&8] &r"
+  prefix: "&bOpenMC &7» &r"
   # Wiadomość logowania
   login: "&cZaloguj się używając &6/login <hasło>"
   # Wiadomość rejestracji
@@ -153,6 +153,6 @@ commands:
 # Ustawienia debugowania
 debug:
   # Czy włączyć logowanie debugowania
-  enabled: false
+  enabled: true
   # Poziom logowania debugowania (INFO, FINE, FINER, FINEST)
   level: FINE

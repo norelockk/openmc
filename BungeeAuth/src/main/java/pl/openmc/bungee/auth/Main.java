@@ -66,7 +66,7 @@ public class Main extends Plugin {
   private static final String MSG_REGISTER = "messages.register";
 
   // Permissions
-  private static final String PERMISSION_QUEUE_BYPASS = "uba.queue.bypass";
+  private static final String PERMISSION_QUEUE_BYPASS = "openmc.queue.bypass";
 
   // Plugin channel names
   private static final String CHANNEL_NAME = "Return";

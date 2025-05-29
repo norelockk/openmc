@@ -77,16 +77,21 @@ public class AsyncPremiumTask implements Runnable {
         // Update user UUID if needed
         User user = UserManager.getUser(playerName);
         if (user != null) {
-          UUID premiumUuid = UUIDFetcher.getUUID(user.getName());
+          // We already fetched and set the UUID in onPreLogin, but double-check here
+          if (!user.isCheckIsUUIDCorrect()) {
+            UUID premiumUuid = UUIDFetcher.getUUID(user.getName());
 
-          if (premiumUuid != null) {
-            // Store the UUID in the user object instead of setting it directly
-            // The UUID will be properly set in the PostLoginEvent handler
-            user.setUUID(premiumUuid);
-            user.setCheckIsUUIDCorrect(true);
-            LOGGER.info("Started UUID correction check for " + playerName);
+            if (premiumUuid != null) {
+              // Store the UUID in the user object instead of setting it directly
+              // The UUID will be properly set in the PostLoginEvent handler
+              user.setUUID(premiumUuid);
+              user.setCheckIsUUIDCorrect(true);
+              LOGGER.info("Started UUID correction check for " + playerName);
+            } else {
+              LOGGER.warning("Could not fetch premium UUID for " + playerName);
+            }
           } else {
-            LOGGER.warning("Could not fetch premium UUID for " + playerName);
+            LOGGER.info("UUID correction check already started for " + playerName);
           }
         }
       } else {

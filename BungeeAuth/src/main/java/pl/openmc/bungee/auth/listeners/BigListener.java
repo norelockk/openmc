@@ -87,31 +87,53 @@ public class BigListener implements Listener {
     LOGGER.info("Premium check for " + playerName + ": " + (isPremium ? "PREMIUM" : "NON-PREMIUM"));
     
     if (isPremium) {
-      // If premium account, create or update user as premium
-      if (user == null) {
-        // Create new user and set as premium
-        user = UserManager.createUser(playerName);
-        if (user != null) {
+      // Get the premium UUID from Mojang API
+      UUID premiumUUID = UUIDFetcher.getUUID(playerName);
+      
+      if (premiumUUID != null) {
+        LOGGER.info("Premium UUID for " + playerName + ": " + premiumUUID);
+        
+        // If premium account, create or update user as premium
+        if (user == null) {
+          // Create new user and set as premium
+          user = UserManager.createUser(playerName);
+          if (user != null) {
+            user.setPremium(true);
+            user.setRegistered(true);
+            user.setUUID(premiumUUID); // Set the correct premium UUID
+            user.setCheckIsUUIDCorrect(true);
+            LOGGER.info("Automatically registered premium account: " + playerName);
+          }
+        } else if (!user.isPremium()) {
+          // Update existing user to premium
           user.setPremium(true);
           user.setRegistered(true);
-          LOGGER.info("Automatically registered premium account: " + playerName);
+          user.setUUID(premiumUUID); // Set the correct premium UUID
+          user.setCheckIsUUIDCorrect(true);
+          LOGGER.info("Updated existing account to premium: " + playerName);
+        } else {
+          // User is already premium, but check if UUID is correct
+          if (!premiumUUID.equals(user.getUUID())) {
+            LOGGER.warning("Correcting UUID for premium user " + playerName + 
+                " from " + user.getUUID() + " to " + premiumUUID);
+            user.setUUID(premiumUUID);
+            user.setCheckIsUUIDCorrect(true);
+          }
         }
-      } else if (!user.isPremium()) {
-        // Update existing user to premium
-        user.setPremium(true);
-        user.setRegistered(true);
-        LOGGER.info("Updated existing account to premium: " + playerName);
+        
+        // Handle premium login
+        handlePremiumLogin(event);
+        return;
+      } else {
+        LOGGER.warning("Could not fetch premium UUID for " + playerName + " despite having premium status");
+        // Continue with non-premium login if we couldn't get the UUID
       }
-      
-      // Handle premium login
-      handlePremiumLogin(event);
-      return;
     } else {
       // Non-premium account
-      if (user != null && user.isPremium()) {
-        // User was marked as premium but isn't actually premium
-        LOGGER.warning("User " + playerName + " was marked as premium but failed premium verification");
-        // Continue with non-premium login but keep premium status for now
+      if (user != null && user.isLogged() && user.isPremium()) {
+        user.setLogged(false);
+        user.setPremium(false);
+        LOGGER.warning("User " + playerName + " was marked as premium but failed premium verification, took away premium status");
       }
       
       // Handle non-premium login
@@ -127,6 +149,9 @@ public class BigListener implements Listener {
   private void handlePremiumLogin(PreLoginEvent event) {
     // Register intent before creating the task
     event.registerIntent(Main.getInstance());
+
+    // Log premium authentication attempt
+    LOGGER.info("Starting premium authentication for " + event.getConnection().getName());
 
     // Create and schedule the task
     AsyncPremiumTask task = new AsyncPremiumTask(event, event.getConnection());
